@@ -10,8 +10,8 @@ const Contact = () => {
           <div className="contact-box">
             <h4>Email</h4>
             <p>
-              <a href="mailto:kashifali@example.com" data-cursor="disable">
-                kashifali@example.com
+              <a href="mailto:kashifalikhokharofficial@gmail.com" data-cursor="disable">
+                kashifalikhokharofficial@gmail.com
               </a>
             </p>
             <h4>Education</h4>
@@ -20,7 +20,7 @@ const Contact = () => {
           <div className="contact-box">
             <h4>Social</h4>
             <a
-              href="https://github.com/kashifali"
+              href="https://github.com/Kashif-Khokhar"
               target="_blank"
               data-cursor="disable"
               className="contact-social"
@@ -28,7 +28,7 @@ const Contact = () => {
               Github <MdArrowOutward />
             </a>
             <a
-              href="https://www.linkedin.com/in/kashifali"
+              href="https://www.linkedin.com/in/kashif-ali-khokhar/"
               target="_blank"
               data-cursor="disable"
               className="contact-social"
@@ -36,7 +36,7 @@ const Contact = () => {
               Linkedin <MdArrowOutward />
             </a>
             <a
-              href="https://x.com/kashifali"
+              href="https://x.com/Kashif_Khokhar1"
               target="_blank"
               data-cursor="disable"
               className="contact-social"
@@ -44,7 +44,7 @@ const Contact = () => {
               Twitter <MdArrowOutward />
             </a>
             <a
-              href="https://www.instagram.com/kashifali"
+              href="https://www.instagram.com/malik._.kashif_khokhar_/?hl=en"
               target="_blank"
               data-cursor="disable"
               className="contact-social"
@@ -54,7 +54,7 @@ const Contact = () => {
           </div>
           <div className="contact-box">
             <h2>
-              Designed and Developed <br /> by <span>Kashif Ali</span>
+              Designed and Developed <br /> by <span>Kashif Ali Khokhar</span>
             </h2>
             <h5>
               <MdCopyright /> 2025
