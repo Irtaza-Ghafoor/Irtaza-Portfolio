@@ -10,8 +10,8 @@ const Contact = () => {
           <div className="contact-box">
             <h4>Email</h4>
             <p>
-              <a href="mailto:rajeshchittyal21@gmail.com" data-cursor="disable">
-                rajeshchittyal21@gmail.com
+              <a href="mailto:kashifali@example.com" data-cursor="disable">
+                kashifali@example.com
               </a>
             </p>
             <h4>Education</h4>
@@ -20,7 +20,7 @@ const Contact = () => {
           <div className="contact-box">
             <h4>Social</h4>
             <a
-              href="https://github.com/raxx21"
+              href="https://github.com/kashifali"
               target="_blank"
               data-cursor="disable"
               className="contact-social"
@@ -28,7 +28,7 @@ const Contact = () => {
               Github <MdArrowOutward />
             </a>
             <a
-              href="https://www.linkedin.com/in/rajesh-chityal-2a70141b3"
+              href="https://www.linkedin.com/in/kashifali"
               target="_blank"
               data-cursor="disable"
               className="contact-social"
@@ -36,7 +36,7 @@ const Contact = () => {
               Linkedin <MdArrowOutward />
             </a>
             <a
-              href="https://x.com/raxx21_official"
+              href="https://x.com/kashifali"
               target="_blank"
               data-cursor="disable"
               className="contact-social"
@@ -44,7 +44,7 @@ const Contact = () => {
               Twitter <MdArrowOutward />
             </a>
             <a
-              href="https://www.instagram.com/therajeshchityal"
+              href="https://www.instagram.com/kashifali"
               target="_blank"
               data-cursor="disable"
               className="contact-social"
@@ -54,7 +54,7 @@ const Contact = () => {
           </div>
           <div className="contact-box">
             <h2>
-              Designed and Developed <br /> by <span>Rajesh Chityal</span>
+              Designed and Developed <br /> by <span>Kashif Ali</span>
             </h2>
             <h5>
               <MdCopyright /> 2025
