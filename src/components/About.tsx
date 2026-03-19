@@ -6,10 +6,12 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          Passionate Developer with a strong focus on building modern, 
-          high-performance web applications. Experienced in various frontend 
-          and backend technologies, dedicated to crafting seamless digital experiences 
-          from design to deployment.
+          As a Full Stack Developer, I specialize in building robust and scalable 
+          web applications by bridging the gap between front-end aesthetics and back-end 
+          efficiency. My expertise lies in creating seamless user experiences using modern 
+          frameworks like React and Next.js, while ensuring performant server-side logic 
+          and database management. I am passionate about clean code, optimization, and 
+          delivering production-ready solutions from architecture to deployment.
         </p>
       </div>
     </div>
