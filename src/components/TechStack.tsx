@@ -21,12 +21,20 @@ const imageUrls = [
   "/images/mysql.webp",
   "/images/typescript.webp",
   "/images/javascript.webp",
+  "/images/html.png",
+  "/images/css.png",
+  "/images/tailwind.png",
+  "/images/vite.png",
+  "/images/git.png",
+  "/images/github.png",
+  "/images/vscode.png",
+  "/images/antigravity.png",
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
 
-const spheres = [...Array(30)].map(() => ({
+const spheres = [...Array(50)].map(() => ({
   scale: [0.7, 1, 0.8, 1, 1][Math.floor(Math.random() * 5)],
 }));
 

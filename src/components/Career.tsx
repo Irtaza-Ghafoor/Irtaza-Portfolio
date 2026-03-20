@@ -16,26 +16,28 @@ const Career = () => {
             <div className="career-info-in">
               <div className="career-role">
                 <h4>Frontend Developer</h4>
-                <h5>Previous Company</h5>
+                <h5>Muasa Solutions</h5>
               </div>
-              <h3>2020</h3>
+              <h3>2025</h3>
             </div>
             <p>
-              Developed responsive web interfaces and optimized user experiences. 
-              Worked with modern frontend frameworks to build scalable components.
+              Built responsive user interfaces and implemented interactive features using React 
+              and modern frontend frameworks. Collaborated with design teams to create 
+              seamless user experiences.
             </p>
           </div>
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
                 <h4>Full Stack Developer</h4>
-                <h5>Current Company</h5>
+                <h5>Infinitiv.ai</h5>
               </div>
-              <h3>2022</h3>
+              <h3>2026</h3>
             </div>
             <p>
-              Designing and implementing end-to-end solutions. Building robust APIs 
-              and interactive frontends for complex web applications.
+              Developing and maintaining full-stack applications using modern technologies. 
+              Working on AI-powered solutions, implementing new features, and optimizing 
+              application performance for scalability.
             </p>
           </div>
         </div>

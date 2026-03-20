@@ -95,14 +95,14 @@ const WhatIDo = () => {
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">React.js</div>
-                <div className="what-tags">Angular</div>
-                <div className="what-tags">Next.js</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">JavaScript</div>
-                <div className="what-tags">Material UI</div>
                 <div className="what-tags">HTML5</div>
                 <div className="what-tags">CSS3</div>
+                <div className="what-tags">JavaScript</div>
+                <div className="what-tags">TypeScript</div>
+                <div className="what-tags">React.js</div>
+                <div className="what-tags">Next.js</div>
+                <div className="what-tags">Tailwind CSS</div>
+                <div className="what-tags">Vite</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -135,13 +135,44 @@ const WhatIDo = () => {
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
                 <div className="what-tags">Node.js</div>
-                <div className="what-tags">NestJS</div>
                 <div className="what-tags">Express.js</div>
                 <div className="what-tags">MongoDB</div>
-                <div className="what-tags">PostgreSQL</div>
-                <div className="what-tags">REST APIs</div>
-                <div className="what-tags">Microservices</div>
-                <div className="what-tags">Python</div>
+                <div className="what-tags">MySQL</div>
+              </div>
+              <div className="what-arrow"></div>
+            </div>
+          </div>
+          <div
+            className="what-content what-noTouch"
+            ref={(el) => setRef(el, 2)}
+          >
+            <div className="what-border1">
+              <svg height="100%">
+                <line
+                  x1="0"
+                  y1="100%"
+                  x2="100%"
+                  y2="100%"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeDasharray="6,6"
+                />
+              </svg>
+            </div>
+            <div className="what-corner"></div>
+            <div className="what-content-in">
+              <h3>TOOLS</h3>
+              <h4>Development Environment</h4>
+              <p>
+                Utilizing modern tools for version control, efficient coding, 
+                and advanced AI-powered development assistance.
+              </p>
+              <h5>Skillset & tools</h5>
+              <div className="what-content-flex">
+                <div className="what-tags">Git</div>
+                <div className="what-tags">GitHub</div>
+                <div className="what-tags">VS Code</div>
+                <div className="what-tags">Antigravity</div>
               </div>
               <div className="what-arrow"></div>
             </div>
