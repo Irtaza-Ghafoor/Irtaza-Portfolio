@@ -135,17 +135,60 @@ a.contact-social {
   cursor: not-allowed;
 }
 
-.status-msg {
-  margin-top: 10px;
-  font-size: 14px;
+.status-alert {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 16px 24px;
+  border-radius: 16px;
+  margin-top: 20px;
+  backdrop-filter: blur(12px);
+  animation: alertSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.status-msg.success {
+.status-alert.success {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.1);
+}
+
+.status-alert.error {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.2);
+  box-shadow: 0 8px 32px rgba(239, 68, 68, 0.1);
+}
+
+.alert-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.status-alert.success .alert-icon {
   color: #10b981;
 }
 
-.status-msg.error {
+.status-alert.error .alert-icon {
   color: #ef4444;
+}
+
+.status-alert p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  opacity: 0.9;
+}
+
+@keyframes alertSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .footer-info {

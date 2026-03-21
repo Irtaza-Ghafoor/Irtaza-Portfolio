@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { MdArrowOutward, MdCopyright, MdSend } from "react-icons/md";
+import { MdArrowOutward, MdCopyright, MdSend, MdCheckCircle, MdError } from "react-icons/md";
 import "./styles/Contact.css";
 
 const Contact = () => {
@@ -110,10 +110,16 @@ const Contact = () => {
                 {isSending ? "Sending..." : "Send Message"} <MdSend />
               </button>
               {status === "success" && (
-                <p className="status-msg success">Message sent successfully!</p>
+                <div className="status-alert success">
+                  <MdCheckCircle className="alert-icon" />
+                  <p>Message sent successfully!</p>
+                </div>
               )}
               {status === "error" && (
-                <p className="status-msg error">Failed to send message. Please try again.</p>
+                <div className="status-alert error">
+                  <MdError className="alert-icon" />
+                  <p>Failed to send message. Please try again.</p>
+                </div>
               )}
             </form>
 
