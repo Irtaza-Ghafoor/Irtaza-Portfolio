@@ -34,32 +34,33 @@
 }
 .what-box-in {
   flex-direction: column;
-  height: 500px;
+  height: 600px;
   margin-left: 200px;
   position: relative;
-  display: none;
+  display: flex;
 }
 .what-content {
-  width: 450px;
-  height: 33%;
-  min-height: 50%;
+  width: 500px;
+  height: 25%;
+  min-height: 25%;
   transition: 0.5s;
-  /* border: 0.5px dashed rgba(255, 255, 255, 0.3); */
   position: relative;
-  padding: 50px;
+  padding: 30px 50px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .what-noTouch:hover,
 .what-content-active {
-  min-height: 67%;
-  padding: 40px 50px;
+  min-height: 55%;
+  padding: 30px 50px;
 }
 
 .what-noTouch:hover ~ .what-content,
 .what-box-in:hover .what-noTouch:not(:hover),
 .what-content.what-sibling {
-  min-height: 33%;
+  min-height: 15%;
   padding: 10px 50px;
 }
 .what-content h3 {
@@ -74,11 +75,7 @@
   letter-spacing: 0.7px;
 }
 .what-content h4 {
-  font-weight: 300;
-  letter-spacing: 1px;
-  margin: 0px;
-  font-size: 14px;
-  opacity: 0.3;
+  display: none;
 }
 .what-content-in {
   opacity: 0;
@@ -209,13 +206,36 @@
   overflow: hidden;
 }
 .what-content-in h5 {
-  font-weight: 300;
-  opacity: 0.5;
-  font-size: 12px;
-  letter-spacing: 1px;
-  font-family: "Geist", sans-serif;
-  margin-bottom: 5px;
+  display: none;
 }
+
+.what-content-in ul {
+  margin: 15px 0;
+  padding-left: 20px;
+  opacity: 0.8;
+}
+
+.what-content-in li {
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 8px;
+  font-weight: 200;
+  letter-spacing: 0.5px;
+}
+
+.what-icon {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  font-size: 30px;
+  color: var(--accentColor);
+  opacity: 0.8;
+}
+
+.user-icon { color: #3b82f6; }
+.code-icon { color: #8b5cf6; }
+.target-icon { color: #10b981; }
+.bulb-icon { color: #f59e0b; }
 @keyframes whatBorders {
   80% {
     opacity: 0.8;

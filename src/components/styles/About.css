@@ -12,8 +12,9 @@
 .about-me {
   padding: 50px 0px;
   padding-bottom: 0;
-  width: 500px;
+  width: 800px;
   max-width: calc(100% - 15px);
+  text-align: center;
 }
 .about-me h3 {
   font-size: 25px;
@@ -24,10 +25,36 @@
 }
 
 .about-me p {
-  font-size: 33px;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 28px;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 30px;
+}
+
+.about-me span {
+  color: var(--accentColor);
   font-weight: 600;
-  line-height: 36px;
-  letter-spacing: 1px;
+}
+
+.about-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(var(--accentColorRgb), 0.15);
+  border: 1px solid var(--accentColor);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 400;
+  margin: auto;
+  box-shadow: 0 0 20px rgba(var(--accentColorRgb), 0.2);
+}
+
+.about-pill span {
+  font-size: 16px;
 }
 
 @media only screen and (min-width: 600px) {

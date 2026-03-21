@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import "./styles/WhatIDo.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FiUser, FiCode, FiTarget, FiCpu } from "react-icons/fi";
 
 const WhatIDo = () => {
   const containerRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -19,7 +20,9 @@ const WhatIDo = () => {
     return () => {
       containerRef.current.forEach((container) => {
         if (container) {
-          container.removeEventListener("click", () => handleClick(container));
+          container.removeEventListener("click", () => {
+            if (container) handleClick(container);
+          });
         }
       });
     };
@@ -87,23 +90,13 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>FRONTEND</h3>
-              <h4>Building Interactive UIs</h4>
-              <p>
-                Crafting performant, responsive interfaces with modern frameworks.
-                From SPAs to micro-frontends, I deliver pixel-perfect experiences.
-              </p>
-              <h5>Skillset & tools</h5>
-              <div className="what-content-flex">
-                <div className="what-tags">HTML5</div>
-                <div className="what-tags">CSS3</div>
-                <div className="what-tags">JavaScript</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">React.js</div>
-                <div className="what-tags">Next.js</div>
-                <div className="what-tags">Tailwind CSS</div>
-                <div className="what-tags">Vite</div>
-              </div>
+              <h3>WHO I AM</h3>
+              <div className="what-icon user-icon"><FiUser /></div>
+              <ul>
+                <li>Dedicated Full-Stack Developer with a relentless focus on creating high-performance, user-centric software solutions.</li>
+                <li>Computer Science scholar specializing in modern architectural patterns and robust system design.</li>
+                <li>A proactive problem-solver driven by technical excellence and the desire to build products that scale.</li>
+              </ul>
               <div className="what-arrow"></div>
             </div>
           </div>
@@ -126,19 +119,13 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>BACKEND</h3>
-              <h4>Scalable Server Architecture</h4>
-              <p>
-                Designing robust APIs and microservices. From CMS platforms to
-                complex business logic, I build backends that scale.
-              </p>
-              <h5>Skillset & tools</h5>
-              <div className="what-content-flex">
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">Express.js</div>
-                <div className="what-tags">MongoDB</div>
-                <div className="what-tags">MySQL</div>
-              </div>
+              <h3>WHAT I DO</h3>
+              <div className="what-icon code-icon"><FiCode /></div>
+              <ul>
+                <li>Develop end-to-end web solutions using the MERN stack and Next.js for modern internal & public platforms.</li>
+                <li>Design efficient database schemas in MySQL and MongoDB, ensuring data integrity and high-speed retrieval.</li>
+                <li>Craft pixel-perfect, interactive user interfaces with Tailwind CSS and Framer Motion for a premium UX.</li>
+              </ul>
               <div className="what-arrow"></div>
             </div>
           </div>
@@ -161,19 +148,42 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>TOOLS</h3>
-              <h4>Development Environment</h4>
-              <p>
-                Utilizing modern tools for version control, efficient coding, 
-                and advanced AI-powered development assistance.
-              </p>
-              <h5>Skillset & tools</h5>
-              <div className="what-content-flex">
-                <div className="what-tags">Git</div>
-                <div className="what-tags">GitHub</div>
-                <div className="what-tags">VS Code</div>
-                <div className="what-tags">Antigravity</div>
-              </div>
+              <h3>MY GOALS</h3>
+              <div className="what-icon target-icon"><FiTarget /></div>
+              <ul>
+                <li>Integrate AI-driven features into web ecosystems to enhance user productivity and experience.</li>
+                <li>Contribute to large-scale open-source projects to give back to the developer community.</li>
+                <li>Master system architecture to build indestructible, enterprise-ready software products.</li>
+              </ul>
+              <div className="what-arrow"></div>
+            </div>
+          </div>
+          <div
+            className="what-content what-noTouch"
+            ref={(el) => setRef(el, 3)}
+          >
+            <div className="what-border1">
+              <svg height="100%">
+                <line
+                  x1="0"
+                  y1="100%"
+                  x2="100%"
+                  y2="100%"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeDasharray="6,6"
+                />
+              </svg>
+            </div>
+            <div className="what-corner"></div>
+            <div className="what-content-in">
+              <h3>MY PHILOSOPHY</h3>
+              <div className="what-icon bulb-icon"><FiCpu /></div>
+              <ul>
+                <li>Code is for humans to read and machines to execute; I prioritize clean, modular, and SOLID code.</li>
+                <li>Security and performance are not features—they are fundamental requirements of every system I build.</li>
+                <li>The best way to predict the future is to build it; I bridge ideas and reality through technology.</li>
+              </ul>
               <div className="what-arrow"></div>
             </div>
           </div>
