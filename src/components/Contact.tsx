@@ -45,7 +45,7 @@ const Contact = () => {
   return (
     <div className="contact-section section-container" id="contact">
       <div className="contact-container">
-        <h3>Contact</h3>
+        <h3 className="contact-title">Contact <span>Me</span></h3>
         <div className="contact-flex">
           <div className="contact-left">
             <div className="contact-box">
@@ -55,8 +55,6 @@ const Contact = () => {
                   kashifalikhokharofficial@gmail.com
                 </a>
               </p>
-              <h4>Education</h4>
-              <p>BSc in Computer Science</p>
             </div>
             <div className="contact-box">
               <h4>Social</h4>
@@ -123,15 +121,16 @@ const Contact = () => {
               )}
             </form>
 
-            <div className="contact-box footer-info">
-              <h2>
-                Designed and Developed <br /> by <span>Kashif Ali</span>
-              </h2>
-              <h5>
-                <MdCopyright /> {new Date().getFullYear()}
-              </h5>
-            </div>
           </div>
+        </div>
+
+        <div className="contact-box footer-info">
+          <h2>
+            Designed and Developed <br /> by <span>Kashif Ali</span>
+          </h2>
+          <h5>
+            <MdCopyright /> {new Date().getFullYear()}
+          </h5>
         </div>
       </div>
     </div>
