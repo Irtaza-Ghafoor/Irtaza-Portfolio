@@ -95,7 +95,7 @@ export default Loading;
 export const setProgress = (setLoading: (value: number) => void) => {
   let percent: number = 0;
 
-  let interval = setInterval(() => {
+  let interval: any = setInterval(() => {
     if (percent <= 50) {
       let rand = Math.round(Math.random() * 5);
       percent = percent + rand;
