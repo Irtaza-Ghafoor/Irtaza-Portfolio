@@ -10,6 +10,7 @@ import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import GithubSection from "./GithubSection";
 import Certificates from "./Certificates";
+import Education from "./Education";
 import setSplitText from "./utils/splitText";
 
 const TechStack = lazy(() => import("./TechStack"));
@@ -45,6 +46,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
             <WhatIDo />
             <Career />
             <Certificates />
+            <Education />
             <Work />
             {isDesktopView && (
               <Suspense fallback={<div>Loading....</div>}>
