@@ -57,7 +57,7 @@ const Contact = () => {
               Designed and Developed <br /> by <span>Kashif Ali</span>
             </h2>
             <h5>
-              <MdCopyright /> 2025
+              <MdCopyright /> {new Date().getFullYear()}
             </h5>
           </div>
         </div>
