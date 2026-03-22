@@ -5,50 +5,42 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const projects = [
   {
-    title: "Project One",
-    category: "Web Application",
-    tools: "React, Node.js, MongoDB",
-    image: "/images/project1.png",
+    title: "Timetable Generator",
+    category: "Academic Tool",
+    tools: "React, TypeScript, Vite",
+    image: "/src/assets/timetable.png",
+    link: "https://timetable-generator-five.vercel.app/",
   },
   {
     title: "Project Two",
     category: "E-Commerce",
     tools: "Next.js, Tailwind CSS, Shopify",
     image: "/images/project2.png",
+    link: "#",
   },
   {
     title: "Project Three",
     category: "UI/UX Design",
     tools: "Figma, Adobe XD",
     image: "/images/project3.png",
+    link: "#",
   },
 ];
 
 const Work = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
 
-  const goToSlide = useCallback(
-    (index: number) => {
-      if (isAnimating) return;
-      setIsAnimating(true);
-      setCurrentIndex(index);
-      setTimeout(() => setIsAnimating(false), 500);
-    },
-    [isAnimating]
-  );
-
-  const goToPrev = useCallback(() => {
-    const newIndex =
-      currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
-    goToSlide(newIndex);
-  }, [currentIndex, goToSlide]);
+  const goToSlide = useCallback((index: number) => {
+    setCurrentIndex(index);
+  }, []);
 
   const goToNext = useCallback(() => {
-    const newIndex =
-      currentIndex === projects.length - 1 ? 0 : currentIndex + 1;
-    goToSlide(newIndex);
-  }, [currentIndex, goToSlide]);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+  }, []);
+
+  const goToPrev = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
+  }, []);
 
   return (
     <div className="work-section" id="work">
@@ -103,7 +95,7 @@ const Work = () => {
                       </div>
                     </div>
                     <div className="carousel-image-wrapper">
-                      <WorkImage image={project.image} alt={project.title} />
+                      <WorkImage image={project.image} alt={project.title} link={project.link} />
                     </div>
                   </div>
                 </div>
@@ -120,8 +112,7 @@ const Work = () => {
                   }`}
                 onClick={() => goToSlide(index)}
                 aria-label={`Go to project ${index + 1}`}
-                data-cursor="disable"
-              />
+              ></button>
             ))}
           </div>
         </div>
