@@ -19,11 +19,11 @@ const projects = [
     link: "https://superior-gpa-calculator-phi.vercel.app/dashboard",
   },
   {
-    title: "Project Three",
-    category: "UI/UX Design",
-    tools: "Figma, Adobe XD",
-    image: "/images/project3.png",
-    link: "#",
+    title: "PrismConvert",
+    category: "Image & PDF Tools",
+    tools: "Next.js, Tailwind CSS, Vercel",
+    image: "/src/assets/prism-convert.png",
+    link: "https://prism-convert-six.vercel.app/",
   },
 ];
 
