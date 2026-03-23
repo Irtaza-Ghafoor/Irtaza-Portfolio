@@ -12,11 +12,11 @@ const projects = [
     link: "https://timetable-generator-five.vercel.app/",
   },
   {
-    title: "Project Two",
-    category: "E-Commerce",
-    tools: "Next.js, Tailwind CSS, Shopify",
-    image: "/images/project2.png",
-    link: "#",
+    title: "Superior GPA Calculator",
+    category: "Academic Tool",
+    tools: "React, TypeScript, Tailwind CSS, Vercel",
+    image: "/src/assets/gpa-calculator.png",
+    link: "https://superior-gpa-calculator-phi.vercel.app/dashboard",
   },
   {
     title: "Project Three",
