@@ -42,24 +42,28 @@
 }
 
 .carousel-slide {
-  min-width: 100%;
-  flex-shrink: 0;
+  width: 100%;
+  flex: 0 0 100%;
   box-sizing: border-box;
   padding: 50px 0;
+  display: flex;
+  justify-content: center;
 }
 
 .carousel-content {
   display: flex;
   align-items: center;
-  gap: 60px;
+  justify-content: center;
+  gap: 80px;
   width: 100%;
+  max-width: 1200px;
 }
 
 .carousel-info {
   flex: 1;
   display: flex;
   gap: 30px;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .carousel-number h3 {
