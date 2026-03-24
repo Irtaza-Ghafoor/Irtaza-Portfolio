@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
@@ -17,6 +17,13 @@ const projects = [
     tools: "React, TypeScript, Tailwind CSS, Vercel",
     image: "/images/gpa-calculator.png",
     link: "https://superior-gpa-calculator-phi.vercel.app/dashboard",
+  },
+  {
+    title: "Currency PRO",
+    category: "Financial Tool",
+    tools: "React, TypeScript, Currency API, Vercel",
+    image: "/images/currency-converter.png",
+    link: "https://currency-converter-mu-ecru.vercel.app/",
   },
   {
     title: "PrismConvert",
@@ -41,6 +48,14 @@ const Work = () => {
   const goToPrev = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
   }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      goToNext();
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [goToNext]);
 
   return (
     <div className="work-section" id="work">
