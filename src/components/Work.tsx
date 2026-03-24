@@ -26,6 +26,13 @@ const projects = [
     link: "https://currency-converter-mu-ecru.vercel.app/",
   },
   {
+    title: "Velora",
+    category: "Event Invitation Studio",
+    tools: "React, TypeScript, Tailwind CSS, Framer Motion",
+    image: "/images/velora.png",
+    link: "https://velora-studio-nu.vercel.app/",
+  },
+  {
     title: "PrismConvert",
     category: "Image & PDF Tools",
     tools: "Next.js, Tailwind CSS, Vercel",
