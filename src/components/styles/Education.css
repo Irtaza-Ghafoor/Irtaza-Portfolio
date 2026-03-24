@@ -1,5 +1,5 @@
 .education-section {
-  padding: 100px 100px;
+  padding: 80px 20px;
   width: 100%;
 }
 
@@ -108,12 +108,15 @@
 }
 
 @media (max-width: 768px) {
+  .education-section {
+    padding: 60px 15px;
+  }
   .education-title {
-    font-size: 40px;
+    font-size: 36px;
   }
   .education-card {
     padding: 20px;
-    gap: 20px;
+    gap: 15px;
   }
   .education-icon-wrapper {
     width: 50px;
@@ -123,12 +126,23 @@
     font-size: 25px;
   }
   .education-info h3 {
-    font-size: 20px;
+    font-size: 18px;
   }
   .education-info .institution {
-    font-size: 16px;
+    font-size: 14px;
   }
   .education-info .duration {
-    font-size: 14px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .education-title {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+
+  .education-info h3 {
+    font-size: 16px;
   }
 }

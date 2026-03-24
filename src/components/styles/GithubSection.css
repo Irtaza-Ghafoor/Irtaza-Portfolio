@@ -244,16 +244,33 @@
 
 @media (max-width: 768px) {
   .github-section {
-    padding: 60px 0;
+    padding: 40px 15px;
   }
   .repos-grid {
     grid-template-columns: 1fr;
+    gap: 15px;
   }
   .github-title {
-    font-size: 45px;
+    font-size: 32px;
   }
   .profile-stats {
     flex-direction: column;
     gap: 15px;
+  }
+  .github-calendar-container {
+    padding: 20px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .github-title {
+    font-size: 28px;
+  }
+  .repo-card {
+    padding: 15px;
+  }
+  .profile-avatar {
+    width: 60px;
+    height: 60px;
   }
 }

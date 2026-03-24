@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { FiMenu, FiX } from "react-icons/fi";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
@@ -9,6 +10,11 @@ gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 export let smoother: ScrollSmoother;
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   useEffect(() => {
     smoother = ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
@@ -52,19 +58,30 @@ const Navbar = () => {
         >
           kashifalikhokharofficial@gmail.com
         </a>
-        <ul>
+
+        {/* Mobile Toggle Button */}
+        <button
+          className="mobile-toggle"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+          data-cursor="disable"
+        >
+          {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+        </button>
+
+        <ul className={isMenuOpen ? "nav-open" : ""}>
           <li>
-            <a data-href="#about" href="#about">
+            <a data-href="#about" href="#about" onClick={() => setIsMenuOpen(false)}>
               <HoverLinks text="ABOUT" />
             </a>
           </li>
           <li>
-            <a data-href="#work" href="#work">
+            <a data-href="#work" href="#work" onClick={() => setIsMenuOpen(false)}>
               <HoverLinks text="WORK" />
             </a>
           </li>
           <li>
-            <a data-href="#contact" href="#contact">
+            <a data-href="#contact" href="#contact" onClick={() => setIsMenuOpen(false)}>
               <HoverLinks text="CONTACT" />
             </a>
           </li>

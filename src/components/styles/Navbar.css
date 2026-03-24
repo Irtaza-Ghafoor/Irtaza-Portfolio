@@ -45,7 +45,52 @@
   font-size: 14px;
   letter-spacing: 0.2px;
 }
+
+.mobile-toggle {
+  display: flex;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 10000;
+  transition: 0.3s ease;
+}
+
+.mobile-toggle:hover {
+  color: var(--accentColor);
+}
+@media only screen and (max-width: 499px) {
+  .header ul {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 250px;
+    height: 100vh;
+    background: rgba(10, 14, 23, 0.95);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    padding: 100px 30px;
+    align-items: flex-start;
+    gap: 30px;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0;
+  }
+
+  .header ul.nav-open {
+    right: 0;
+  }
+
+  .header ul li {
+    font-size: 18px;
+  }
+}
+
 @media only screen and (min-width: 500px) {
+  .mobile-toggle {
+    display: none;
+  }
   .header {
     padding: 20px 0px;
   }
