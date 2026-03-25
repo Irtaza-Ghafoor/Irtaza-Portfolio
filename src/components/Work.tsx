@@ -5,6 +5,13 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const projects = [
   {
+    title: "SkyCast Elite",
+    category: "Weather Intelligence",
+    tools: "React, TypeScript, OpenWeather API, Lucide Icons, Vercel",
+    image: "/images/skycast-elite.png",
+    link: "https://sky-cast-nine-theta.vercel.app/",
+  },
+  {
     title: "Timetable Generator",
     category: "Academic Tool",
     tools: "React, TypeScript, Vite",
