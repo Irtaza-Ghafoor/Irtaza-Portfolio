@@ -1,13 +1,48 @@
-# My Portfolio Wesbite - Overview 🚀
+# Kashif Ali Portfolio 🚀
 
-This repository contains the open source version of my porfolio website.
-Do check it out!
+A modern, responsive, and high-performance portfolio website built with React, TypeScript, and 3D technologies.
 
-## Instructions 🛠️
+## About Me 👋
 
-I have modified the gsap club plugins with the trial plugins, but with the trial plugin you cannot host it🔴. So for Club plugins, Check out here: https://gsap.com/docs/v3/Installation/
+I'm **Kashif Ali**, a Full-Stack Developer and Computer Science student at Superior University (2023 - 2027). I have a passion for turning ideas into scalable web applications and solving complex coding challenges. I thrive on constantly learning and exploring new technologies to build impactful solutions.
 
-**Techstack** - React, Next.js, Node.js, Express.js, MongoDB, MySQL, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS, Vite, GSAP, Three.js, Git, GitHub
+## Featured Projects 🏗️
+
+- **SkyCast Elite** - [Live](https://sky-cast-nine-theta.vercel.app/)  
+  Weather Intelligence app built with React, TypeScript, and OpenWeather API.
+- **Timetable Generator** - [Live](https://timetable-generator-five.vercel.app/)  
+  Academic tool for efficient schedule management.
+- **Superior GPA Calculator** - [Live](https://superior-gpa-calculator-phi.vercel.app/dashboard)  
+  Academic tool built with Tailwind CSS for students.
+- **Currency PRO** - [Live](https://currency-converter-mu-ecru.vercel.app/)  
+  Financial tool integrated with Currency API.
+- **Velora** - [Live](https://velora-studio-nu.vercel.app/)  
+  Event Invitation Studio using Framer Motion.
+- **PrismConvert** - [Live](https://prism-convert-six.vercel.app/)  
+  Image & PDF Tools built with Next.js.
+
+## Professional Experience 💼
+
+- **Full Stack Developer** @ Infinitiv.ai (2026 - Present)  
+  Working on AI-powered solutions and optimizing application performance for scalability.
+- **Frontend Developer** @ Muasa Solutions (2025)  
+  Built responsive user interfaces and interactive features.
+
+## Tech Stack 🛠️
+
+- **Languages:** TypeScript, JavaScript, HTML5, CSS3
+- **Frontend:** React, Next.js, Vite, Tailwind CSS, Framer Motion
+- **Animations & 3D:** GSAP, Three.js, React Three Fiber
+- **Backend & Database:** Node.js, Express.js, MongoDB, MySQL
+- **Tools:** Git, GitHub, VS Code, Vercel
+
+## Contact & Connect 🔗
+
+- 📧 **Email:** [kashifalikhokharofficial@gmail.com](mailto:kashifalikhokharofficial@gmail.com)
+- 🐙 **GitHub:** [@Kashif-Khokhar](https://github.com/Kashif-Khokhar)
+- 💼 **LinkedIn:** [Kashif Ali Khokhar](https://www.linkedin.com/in/kashif-ali-khokhar/)
+- 🐦 **Twitter/X:** [@Kashif_Khokhar1](https://x.com/Kashif_Khokhar1)
+- 📸 **Instagram:** [@malik._.kashif_khokhar_](https://www.instagram.com/malik._.kashif_khokhar_/?hl=en)
 
 ![Portfolio-Preview](public/images/preview.png)
 
