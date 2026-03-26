@@ -2,6 +2,8 @@
 
 A modern, responsive, and high-performance portfolio website built with React, TypeScript, and 3D technologies.
 
+![Portfolio-Preview](public/images/preview.png)
+
 ## About Me 👋
 
 I'm **Kashif Ali**, a Full-Stack Developer and Computer Science student at Superior University (2023 - 2027). I have a passion for turning ideas into scalable web applications and solving complex coding challenges. I thrive on constantly learning and exploring new technologies to build impactful solutions.
@@ -44,7 +46,7 @@ I'm **Kashif Ali**, a Full-Stack Developer and Computer Science student at Super
 - 🐦 **Twitter/X:** [@Kashif_Khokhar1](https://x.com/Kashif_Khokhar1)
 - 📸 **Instagram:** [@malik._.kashif_khokhar_](https://www.instagram.com/malik._.kashif_khokhar_/?hl=en)
 
-![Portfolio-Preview](public/images/preview.png)
+
 
 ## License
 
