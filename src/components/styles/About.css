@@ -1,13 +1,14 @@
 .about-section {
   display: flex;
   align-items: center;
-  justify-content: left;
-  place-items: center;
+  justify-content: center;
   position: relative;
   opacity: 1;
   height: auto;
-  width: var(--cWidth);
+  width: 100%;
+  max-width: var(--cMaxWidth);
   margin: auto;
+  padding: 80px 0;
 }
 
 .about-me {
@@ -27,9 +28,9 @@
 }
 
 .about-me p {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 300;
-  line-height: 28px;
+  line-height: 1.6;
   letter-spacing: 0.5px;
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 30px;
@@ -67,13 +68,12 @@
 
 @media only screen and (min-width: 768px) {
   .about-me {
-    width: 500px;
-    max-width: calc(100% - 70px);
-    transform: translateY(0%);
+    width: 600px;
+    max-width: 90%;
   }
 
-  .about-section {
-    opacity: 1;
+  .about-me p {
+    font-size: 20px;
   }
 }
 

@@ -111,16 +111,21 @@
 
 @media (max-width: 768px) {
   .education-section {
-    padding: 60px 15px;
+    padding: 60px 0;
   }
 
   .education-title {
     font-size: 36px;
+    line-height: 1.2;
+    margin-bottom: 50px;
   }
 
   .education-card {
-    padding: 20px;
+    padding: 25px;
     gap: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .education-icon-wrapper {

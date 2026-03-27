@@ -1,5 +1,10 @@
 .section-container {
-  width: 1300px;
+  width: 100%;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  padding: 0 20px;
 }
 .title,
 .para {
@@ -11,18 +16,17 @@
 }
 @media only screen and (max-width: 1600px) {
   .section-container {
-    width: 1200px;
-    max-width: calc(100% - 160px);
+    max-width: 1200px;
   }
 }
 @media only screen and (max-width: 1400px) {
   .section-container {
-    width: 900px;
+    max-width: 900px;
   }
 }
 @media only screen and (max-width: 900px) {
   .section-container {
-    width: 500px;
-    max-width: var(--cWidth);
+    max-width: 100%;
+    padding: 0 15px;
   }
 }
