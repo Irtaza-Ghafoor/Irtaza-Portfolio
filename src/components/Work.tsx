@@ -46,6 +46,13 @@ const projects = [
     image: "/images/prism-convert.png",
     link: "https://prism-convert-six.vercel.app/",
   },
+  {
+    title: "CryptoStego",
+    category: "Cybersecurity Tool",
+    tools: "React, AES-256, LSB Steganography, CryptoJS, Vercel",
+    image: "/images/crypto-stego.png",
+    link: "https://crypto-stego.vercel.app/",
+  },
 ];
 
 const Work = () => {
