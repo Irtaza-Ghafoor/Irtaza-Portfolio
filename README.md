@@ -13,7 +13,7 @@ I'm **Kashif Ali**, a Full-Stack Developer and Computer Science student at Super
 - 🧑‍🎨 **Interactive 3D character** rendered with Three.js / React Three Fiber that reacts to cursor movement.
 - 🌀 **Buttery smooth scrolling** powered by GSAP ScrollSmoother, with scroll-scrubbed hero animations.
 - 🪄 **Physics-driven tech stack** — floating skill balls simulated with Rapier physics.
-- 📊 **Live GitHub section** showing real contributions, top repositories, and profile stats.
+- 📊 **Live GitHub section** — a self-updating contribution calendar (private repos included, via an authenticated serverless function), plus top repositories and profile stats pulled straight from the GitHub API.
 - 📱 **Fully responsive** — tuned from large desktops down to small phones, with a polished mobile nav drawer.
 - ✉️ **Working contact form** and a custom animated cursor.
 - ⚡ **Performance-focused** — capped device pixel ratio, gated WebGL render loops, and lean scroll handlers.
@@ -81,6 +81,25 @@ npm run preview
 ```
 
 The app runs on Vite — the dev server starts at `http://localhost:5173` by default.
+
+## Environment Variables 🔑
+
+The serverless functions in [`/api`](api) need a few secrets. Add them to a
+`.env.local` file (gitignored) for local development, and to your Vercel project's
+**Settings → Environment Variables** for production.
+
+| Variable | Used by | Purpose |
+| --- | --- | --- |
+| `GITHUB_TOKEN` | `api/github-contributions.ts` | GitHub PAT (classic, `read:user` scope). Lets the GitHub section show **private-inclusive** contributions that match your real profile count. Without it, the section falls back to public-only contributions. |
+| `EMAIL_USER` | `api/contact.ts` | Gmail address that receives contact-form messages. |
+| `EMAIL_PASS` | `api/contact.ts` | Gmail [app password](https://myaccount.google.com/apppasswords) for that account. |
+
+> **Live contribution counts:** the GitHub section auto-updates as you contribute —
+> the endpoint is edge-cached for 1 hour, so new activity appears within the hour
+> without any redeploy. To include private contributions, also enable
+> *GitHub → Settings → Public profile → "Include private contributions on my profile"*.
+> Serverless functions only run on Vercel (`vercel dev`), so plain `npm run dev`
+> shows the public-only fallback locally.
 
 ## License
 
