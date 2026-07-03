@@ -1,9 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { GitHubCalendar } from "react-github-calendar";
+import React, { useEffect, useMemo, useState } from "react";
 import { FaRegStar, FaCodeBranch } from "react-icons/fa";
 import { MdArrowOutward } from "react-icons/md";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./styles/GithubSection.css";
+
+// Teal palette, one colour per GitHub contribution level (index = level 0–4).
+const LEVEL_COLORS = ["#161b22", "#0d2d2a", "#1b5c56", "#309b8f", "#5eead4"];
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+interface ContribDay {
+  date: string;
+  count: number;
+  level: number;
+}
+
+// GitHub weeks run Sunday→Saturday. Group the flat day list into week columns,
+// starting a new column on each Sunday (the first column may be partial).
+const groupIntoWeeks = (days: ContribDay[]): ContribDay[][] => {
+  const weeks: ContribDay[][] = [];
+  let current: ContribDay[] = [];
+  days.forEach((day) => {
+    const dow = new Date(`${day.date}T00:00:00`).getDay();
+    if (dow === 0 && current.length) {
+      weeks.push(current);
+      current = [];
+    }
+    current.push(day);
+  });
+  if (current.length) weeks.push(current);
+  return weeks;
+};
 
 interface Repo {
   id: number;
@@ -41,6 +67,7 @@ const fallbackProfile: UserProfile = {
 const GithubSection: React.FC = () => {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [contribDays, setContribDays] = useState<ContribDay[]>([]);
   const [totalContributions, setTotalContributions] = useState<number>(0);
 
   useEffect(() => {
@@ -52,33 +79,35 @@ const GithubSection: React.FC = () => {
       .then((data) => setProfile(data && data.login ? data : fallbackProfile))
       .catch(() => setProfile(fallbackProfile));
 
-    // Fetch total contributions
-    const fetchContributions = async () => {
-      try {
-        const response = await fetch(`https://github-contributions-api.deno.dev/${username.toLowerCase()}.json`);
-        if (!response.ok) throw new Error("Failed to fetch contributions");
-        const data = await response.json();
-        
-        if (data.total && data.total.lastYear) {
-          setTotalContributions(data.total.lastYear);
-        } else {
-          const allDays = data.contributions.flat();
-          const oneYearAgo = new Date();
-          oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-          
-          const total = allDays.reduce((sum: number, day: any) => {
-            const date = new Date(day.date);
-            return date >= oneYearAgo ? sum + day.count : sum;
-          }, 0);
-          setTotalContributions(total);
-        }
-      } catch (err) {
-        console.error("Contributions fetch error:", err);
-        setTotalContributions(-1); // Indicator for "Recent contributions"
-      }
+    // Contributions come from our own serverless function, which uses an
+    // authenticated GitHub token to include PRIVATE-repo contributions (so the
+    // total matches the profile). If that endpoint isn't available — e.g. the
+    // Vite dev server has no serverless runtime — fall back to the public API
+    // directly so the calendar still renders (public-only count).
+    const applyData = (total: number, days: ContribDay[]) => {
+      setTotalContributions(total > 0 ? total : days.length ? -1 : 0);
+      setContribDays(days);
     };
 
-    fetchContributions();
+    fetch("/api/github-contributions")
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .then((data) => applyData(data.total, data.days || []))
+      .catch(() => {
+        fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`)
+          .then((res) => res.json())
+          .then((data) => {
+            const days: ContribDay[] = (data.contributions || []).map((d: any) => ({
+              date: d.date,
+              count: d.count,
+              level: d.level ?? 0,
+            }));
+            applyData(data?.total?.lastYear ?? 0, days);
+          })
+          .catch((err) => {
+            console.error("Contributions fetch error:", err);
+            setTotalContributions(-1); // Indicator for "Recent contributions"
+          });
+      });
 
     // Fetch top 3 repos
     fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=10`)
@@ -97,12 +126,20 @@ const GithubSection: React.FC = () => {
       .catch(err => console.error("Repos fetch error:", err));
   }, []);
 
-  // This section renders null until the profile fetch resolves, so mounting it
-  // changes the total page height. Refresh ScrollTriggers (nav active-state,
-  // hero timelines) so they recalculate against the new layout.
+  // This section renders null until the profile fetch resolves, and the calendar
+  // grid appears once contributions load — both change the total page height.
+  // Refresh ScrollTriggers (nav active-state, hero timelines) so they
+  // recalculate against the new layout.
   useEffect(() => {
     if (profile) ScrollTrigger.refresh();
-  }, [profile]);
+  }, [profile, contribDays]);
+
+  const weeks = useMemo(() => groupIntoWeeks(contribDays), [contribDays]);
+  // Empty cells to pad the top of the first (partial) week column so every row
+  // lines up with its weekday.
+  const firstWeekOffset = weeks[0]?.length
+    ? new Date(`${weeks[0][0].date}T00:00:00`).getDay()
+    : 0;
 
   if (!profile) return null;
 
@@ -115,23 +152,64 @@ const GithubSection: React.FC = () => {
       <div className="github-calendar-container">
         <div className="calendar-header">
            <span>
-             {totalContributions > 0 
+             {totalContributions > 0
                ? `${totalContributions} contributions in the last year`
-               : totalContributions < 0 
-                 ? "Recent contributions" 
+               : totalContributions < 0
+                 ? "Recent contributions"
                  : "Loading contributions..."}
            </span>
         </div>
-        <GitHubCalendar 
-          username={username} 
-          blockSize={14} 
-          blockMargin={4} 
-          fontSize={16}
-          theme={{
-            light: ['#161b22', '#0d2d2a', '#1b5c56', '#309b8f', '#5eead4'],
-            dark: ['#161b22', '#0d2d2a', '#1b5c56', '#309b8f', '#5eead4'],
-          }}
-        />
+
+        {weeks.length > 0 && (
+          <div className="contrib-calendar">
+            <div className="contrib-months">
+              {weeks.map((week, i) => {
+                // Label a column when its month differs from the previous
+                // column's; the text overflows to the right, GitHub-style.
+                const month = new Date(`${week[0].date}T00:00:00`).getMonth();
+                const prevMonth =
+                  i > 0 ? new Date(`${weeks[i - 1][0].date}T00:00:00`).getMonth() : month;
+                const label = i > 0 && month !== prevMonth ? MONTHS[month] : "";
+                return (
+                  <span className="contrib-month" key={week[0].date}>
+                    {label}
+                  </span>
+                );
+              })}
+            </div>
+
+            <div className="contrib-grid">
+              {weeks.map((week, wi) => (
+                <div className="contrib-week" key={week[0].date}>
+                  {wi === 0 &&
+                    Array.from({ length: firstWeekOffset }).map((_, p) => (
+                      <div className="contrib-day empty" key={`pad-${p}`} />
+                    ))}
+                  {week.map((day) => (
+                    <div
+                      className="contrib-day"
+                      key={day.date}
+                      style={{ backgroundColor: LEVEL_COLORS[day.level] }}
+                      title={`${day.count} contribution${day.count !== 1 ? "s" : ""} on ${day.date}`}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            <div className="contrib-legend">
+              <span>Less</span>
+              {LEVEL_COLORS.map((color) => (
+                <span
+                  className="contrib-day"
+                  key={color}
+                  style={{ backgroundColor: color }}
+                />
+              ))}
+              <span>More</span>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="github-intro">

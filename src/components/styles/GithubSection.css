@@ -33,21 +33,61 @@
   text-align: left;
 }
 
-/* Hide the default total count at the bottom */
-.github-calendar-container article > div:nth-child(2) {
-  display: none !important;
-  visibility: hidden !important;
+/* Custom contribution calendar (rendered from our serverless endpoint so it can
+   include private contributions). inline-block + max-content keeps it its true
+   width inside the horizontally-scrollable container on narrow screens. */
+.contrib-calendar {
+  display: inline-block;
+  min-width: max-content;
 }
 
-.github-calendar-container article > div:last-child {
-  opacity: 0;
-  height: 0;
-  pointer-events: none;
+.contrib-months {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 6px;
 }
 
-.github-calendar-container article {
+/* Same width + gap as a day column so labels sit above the right week; the text
+   is wider than one column, so let it overflow to the right. */
+.contrib-month {
+  width: 12px;
+  flex: 0 0 12px;
+  font-size: 11px;
+  opacity: 0.6;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.contrib-grid {
+  display: flex;
+  gap: 3px;
+}
+
+.contrib-week {
   display: flex;
   flex-direction: column;
+  gap: 3px;
+}
+
+.contrib-day {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex: 0 0 12px;
+}
+
+.contrib-day.empty {
+  background: transparent !important;
+}
+
+.contrib-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 12px;
+  font-size: 12px;
+  opacity: 0.6;
 }
 
 .github-intro {
