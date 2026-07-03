@@ -33,6 +33,10 @@ const Contact = () => {
         el.scrollIntoView({ behavior: "smooth" });
       }
     }
+    // Keep the address bar clean — scroll only, no #section hash.
+    if (window.location.hash) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
   };
 
   const sendEmail = (e: React.FormEvent) => {
@@ -155,7 +159,15 @@ const Contact = () => {
         <footer className="site-footer">
           <div className="footer-top">
             <div className="footer-brand">
-              <a href="/#" className="footer-logo" data-cursor="disable">
+              <a
+                href="/"
+                className="footer-logo"
+                data-cursor="disable"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToTop();
+                }}
+              >
                 Kashif<span>Ali</span>
               </a>
               <p>

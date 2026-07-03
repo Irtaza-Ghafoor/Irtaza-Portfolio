@@ -90,16 +90,42 @@ The serverless functions in [`/api`](api) need a few secrets. Add them to a
 
 | Variable | Used by | Purpose |
 | --- | --- | --- |
-| `GITHUB_TOKEN` | `api/github-contributions.ts` | GitHub PAT (classic, `read:user` scope). Lets the GitHub section show **private-inclusive** contributions that match your real profile count. Without it, the section falls back to public-only contributions. |
+| `GITHUB_TOKEN` | `api/github-contributions.ts`, `api/github-repos.ts` | GitHub PAT (classic, `read:user` scope). Powers the live GitHub section — **private-inclusive** contribution counts and **pinned** repositories. Without it, both endpoints fall back to public-only data. |
 | `EMAIL_USER` | `api/contact.ts` | Gmail address that receives contact-form messages. |
 | `EMAIL_PASS` | `api/contact.ts` | Gmail [app password](https://myaccount.google.com/apppasswords) for that account. |
 
-> **Live contribution counts:** the GitHub section auto-updates as you contribute —
-> the endpoint is edge-cached for 1 hour, so new activity appears within the hour
-> without any redeploy. To include private contributions, also enable
-> *GitHub → Settings → Public profile → "Include private contributions on my profile"*.
 > Serverless functions only run on Vercel (`vercel dev`), so plain `npm run dev`
-> shows the public-only fallback locally.
+> uses the public-only fallbacks locally. To include **private** contributions,
+> also enable *GitHub → Settings → Public profile → "Include private contributions
+> on my profile"*.
+
+## GitHub Integration ⚙️
+
+The live GitHub section is driven by two small serverless functions in [`/api`](api)
+that talk to GitHub's **authenticated GraphQL API** (using `GITHUB_TOKEN`). Both are
+edge-cached and auto-update — no redeploy needed when your GitHub activity changes.
+
+### Live contributions — [`api/github-contributions.ts`](api/github-contributions.ts)
+
+- Returns the **contribution calendar for a given year** (`?year=2026`), including
+  **private-repo** contributions so the total matches what you see on your GitHub
+  profile. Falls back to the public API (public-only count) if the token is missing.
+- The frontend renders a **custom calendar grid** (in the site's teal theme) with a
+  **year selector** — current year back to your account's join year — and always
+  draws the **full Jan–Dec** grid like GitHub, with future days as empty cells.
+- **Timezone-correct:** year boundaries use `TZ_OFFSET` (default `+05:00`, PKT) so
+  today's contributions bucket onto the right day. Change this one constant if your
+  GitHub timezone differs.
+- **Cache:** 5 minutes — new contributions appear within ~5–10 minutes.
+
+### Pinned repositories — [`api/github-repos.ts`](api/github-repos.ts)
+
+- Returns your **first 3 pinned repositories** (name, description, language, stars,
+  forks) via GraphQL — pinned repos are **not** available through the REST API.
+- Change your pins on GitHub and the site follows automatically (in pin order).
+  Falls back to most recently-updated public repos if the token is missing or you
+  have no pins.
+- **Cache:** 1 hour — pins change rarely.
 
 ## License
 

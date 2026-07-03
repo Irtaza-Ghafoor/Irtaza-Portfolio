@@ -81,6 +81,13 @@ const Navbar = () => {
     smoother.paused(true);
     updateActive();
 
+    // Keep the address bar clean — strip any "#section" hash (e.g. a stale
+    // /#work left from a previous click, or a shared deep link) without adding a
+    // history entry or triggering a jump.
+    if (window.location.hash) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+
     let links = document.querySelectorAll(".header ul a");
     links.forEach((elem) => {
       let element = elem as HTMLAnchorElement;
@@ -92,6 +99,10 @@ const Navbar = () => {
         let elem = e.currentTarget as HTMLAnchorElement;
         let section = elem.getAttribute("data-href");
         smoother.scrollTo(section, true, "top top");
+        // Scroll only — never leave a #section hash in the URL.
+        if (window.location.hash) {
+          history.replaceState(null, "", window.location.pathname + window.location.search);
+        }
       });
     });
     // Only refresh on a real WIDTH change. On mobile, scrolling down hides the
@@ -118,7 +129,17 @@ const Navbar = () => {
   return (
     <>
       <div className={`header${scrolled ? " scrolled" : ""}`}>
-        <a href="/#" className="navbar-title" data-cursor="disable">
+        <a
+          href="/"
+          className="navbar-title"
+          data-cursor="disable"
+          onClick={(e) => {
+            // Scroll to top without navigating or leaving a hash in the URL.
+            e.preventDefault();
+            if (smoother) smoother.scrollTo(0, true);
+            else window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        >
           K<span>A</span>
         </a>
 
