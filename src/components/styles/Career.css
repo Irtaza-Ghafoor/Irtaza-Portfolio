@@ -181,8 +181,11 @@
     left: 0%;
   }
 
+  /* Full width (was calc(100% - 25px), which left a dead strip on the right
+     since the section left-aligns its content on small screens). The section's
+     own 20px padding already provides the side spacing. */
   .career-container {
-    width: calc(100% - 25px);
+    width: 100%;
   }
 }
 
