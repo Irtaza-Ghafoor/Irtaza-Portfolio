@@ -81,10 +81,11 @@ const Navbar = () => {
     smoother.paused(true);
     updateActive();
 
-    // Keep the address bar clean — strip any "#section" hash (e.g. a stale
-    // /#work left from a previous click, or a shared deep link) without adding a
-    // history entry or triggering a jump.
-    if (window.location.hash) {
+    // Keep the address bar clean — strip any hash (a "#section" deep link, or a
+    // bare "#" from a placeholder link) without adding a history entry or a jump.
+    // NOTE: a bare "#" makes location.hash === "" (falsy), so we test the full
+    // href for a "#" instead of location.hash.
+    if (window.location.href.includes("#")) {
       history.replaceState(null, "", window.location.pathname + window.location.search);
     }
 
@@ -100,7 +101,7 @@ const Navbar = () => {
         let section = elem.getAttribute("data-href");
         smoother.scrollTo(section, true, "top top");
         // Scroll only — never leave a #section hash in the URL.
-        if (window.location.hash) {
+        if (window.location.href.includes("#")) {
           history.replaceState(null, "", window.location.pathname + window.location.search);
         }
       });

@@ -110,7 +110,14 @@ const SocialIcons = () => {
           </a>
         </span>
       </div>
-      <a className="resume-button" href="#">
+      {/* TODO: point href at the actual resume (PDF in /public or an external
+          link). Until then, preventDefault so this placeholder doesn't push a
+          bare "#" into the address bar. */}
+      <a
+        className="resume-button"
+        href="#"
+        onClick={(e) => e.preventDefault()}
+      >
         <HoverLinks text="RESUME" />
         <span>
           <TbNotes />

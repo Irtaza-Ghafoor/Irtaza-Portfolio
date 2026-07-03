@@ -33,8 +33,9 @@ const Contact = () => {
         el.scrollIntoView({ behavior: "smooth" });
       }
     }
-    // Keep the address bar clean — scroll only, no #section hash.
-    if (window.location.hash) {
+    // Keep the address bar clean — scroll only, no hash (bare "#" makes
+    // location.hash === "", so test the full href instead).
+    if (window.location.href.includes("#")) {
       history.replaceState(null, "", window.location.pathname + window.location.search);
     }
   };
