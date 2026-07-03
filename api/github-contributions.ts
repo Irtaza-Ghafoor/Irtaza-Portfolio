@@ -3,10 +3,20 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 const USERNAME = 'Kashif-Khokhar';
 
 // GitHub buckets each contribution into a day using the account's timezone, so
-// the year boundaries must be expressed in that same offset — otherwise a few
-// contributions near midnight on Jan 1 fall outside a UTC window and the yearly
-// total comes up short. Set this to your GitHub timezone (PKT = +05:00).
+// the year window must be expressed in that same offset. Otherwise the boundary
+// dates are wrong: e.g. late-evening-UTC / early-morning-PKT contributions on
+// "today" land on the previous UTC date, so `to = now` (UTC) cuts the calendar
+// off a day early and today's contributions never appear. Set this to your
+// GitHub timezone (PKT = +05:00).
 const TZ_OFFSET = '+05:00';
+const TZ_OFFSET_MIN = 5 * 60; // Minutes matching TZ_OFFSET — keep in sync.
+
+// Render an instant as an ISO string carrying TZ_OFFSET, so its DATE component
+// is the local calendar day rather than the UTC one.
+function toLocalISO(instant: Date): string {
+  const shifted = new Date(instant.getTime() + TZ_OFFSET_MIN * 60_000);
+  return shifted.toISOString().replace('Z', TZ_OFFSET);
+}
 
 // GitHub's 5 contribution levels → palette indices (0–4). The frontend maps
 // these onto the teal theme, so we only pass the level, never a hex colour.
@@ -101,11 +111,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   let to: string | null = null;
   if (isYear) {
     from = `${rawYear}-01-01T00:00:00${TZ_OFFSET}`;
-    // Clamp the end to "now" for the current (in-progress) year so GitHub
-    // doesn't reject a future `to`; full past years run to Dec 31.
-    const endOfYear = new Date(`${rawYear}-12-31T23:59:59${TZ_OFFSET}`);
+    // For the current (in-progress) year clamp the end to "now" — but expressed
+    // in the local offset, so its DATE is the local today and today's cell is
+    // included. Full past years simply run to Dec 31 local time.
+    const endOfYear = `${rawYear}-12-31T23:59:59${TZ_OFFSET}`;
     const now = new Date();
-    to = endOfYear > now ? now.toISOString() : `${rawYear}-12-31T23:59:59${TZ_OFFSET}`;
+    to = new Date(endOfYear) > now ? toLocalISO(now) : endOfYear;
   }
   const publicYear = isYear ? (rawYear as string) : 'last';
 
