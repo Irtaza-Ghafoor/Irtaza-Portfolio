@@ -20,12 +20,17 @@ interface Day {
 
 // Authenticated GraphQL: because the token belongs to the profile owner, the
 // contribution calendar includes PRIVATE-repo contributions — this is the only
-// way to match the "703 in the last year" number GitHub shows the owner.
-async function fromGraphQL(token: string): Promise<{ total: number; days: Day[] }> {
+// way to match the count GitHub shows the owner. `from`/`to` scope it to a
+// specific year; when null, GitHub returns the rolling last 12 months.
+async function fromGraphQL(
+  token: string,
+  from: string | null,
+  to: string | null
+): Promise<{ total: number; days: Day[] }> {
   const query = `
-    query($login: String!) {
+    query($login: String!, $from: DateTime, $to: DateTime) {
       user(login: $login) {
-        contributionsCollection {
+        contributionsCollection(from: $from, to: $to) {
           contributionCalendar {
             totalContributions
             weeks {
@@ -42,7 +47,7 @@ async function fromGraphQL(token: string): Promise<{ total: number; days: Day[] 
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ query, variables: { login: USERNAME } }),
+    body: JSON.stringify({ query, variables: { login: USERNAME, from, to } }),
   });
 
   if (!res.ok) throw new Error(`GraphQL HTTP ${res.status}`);
@@ -60,11 +65,12 @@ async function fromGraphQL(token: string): Promise<{ total: number; days: Day[] 
   return { total: cal.totalContributions, days };
 }
 
-// Tokenless public source. Only sees PUBLIC contributions (~322), used when no
-// token is configured or as a last-ditch fallback so the calendar still renders.
-async function fromPublic(): Promise<{ total: number; days: Day[] }> {
+// Tokenless public source. Only sees PUBLIC contributions, used when no token is
+// configured or as a last-ditch fallback so the calendar still renders. `year`
+// is a 4-digit string or "last" (rolling 12 months).
+async function fromPublic(year: string): Promise<{ total: number; days: Day[] }> {
   const res = await fetch(
-    `https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`
+    `https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=${year}`
   );
   if (!res.ok) throw new Error(`Public API HTTP ${res.status}`);
   const json = await res.json();
@@ -73,13 +79,35 @@ async function fromPublic(): Promise<{ total: number; days: Day[] }> {
     count: d.count,
     level: d.level ?? 0,
   }));
-  return { total: json?.total?.lastYear ?? 0, days };
+  // This API keys the total by year ("2025") for a year, or "lastYear" for last.
+  const total = json?.total?.[year] ?? json?.total?.lastYear ?? 0;
+  return { total, days };
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // Accept ?year=2025 (4 digits). Anything else → rolling last 12 months.
+  const rawYear = Array.isArray(req.query.year)
+    ? req.query.year[0]
+    : req.query.year;
+  const isYear = typeof rawYear === 'string' && /^\d{4}$/.test(rawYear);
+
+  let from: string | null = null;
+  let to: string | null = null;
+  if (isYear) {
+    from = `${rawYear}-01-01T00:00:00Z`;
+    // Clamp the end to "now" for the current (in-progress) year so GitHub
+    // doesn't reject a future `to`.
+    const endOfYear = new Date(`${rawYear}-12-31T23:59:59Z`);
+    const now = new Date();
+    to = (endOfYear > now ? now : endOfYear).toISOString();
+  }
+  const publicYear = isYear ? (rawYear as string) : 'last';
+
   try {
     const token = process.env.GITHUB_TOKEN;
-    const data = token ? await fromGraphQL(token) : await fromPublic();
+    const data = token
+      ? await fromGraphQL(token, from, to)
+      : await fromPublic(publicYear);
 
     // Cache at the edge for an hour (contributions change at most once a day),
     // serving stale for a day while revalidating — keeps us well under any limit.
@@ -94,7 +122,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // If the authenticated path failed (bad/expired token, GitHub hiccup), still
     // try to return public data so the section isn't blank.
     try {
-      const data = await fromPublic();
+      const data = await fromPublic(publicYear);
       return res.status(200).json({ source: 'public-fallback', ...data });
     } catch {
       console.error('Contributions fetch failed:', err);

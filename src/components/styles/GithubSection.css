@@ -28,9 +28,47 @@
 .calendar-header {
   margin-bottom: 20px;
   font-size: 14px;
-  opacity: 0.8;
   font-weight: 500;
-  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.calendar-header > span {
+  opacity: 0.8;
+}
+
+/* Year picker — pills in the teal theme, active year filled with the accent. */
+.year-selector {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.year-btn {
+  padding: 4px 14px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.year-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.year-btn.active {
+  background: var(--accentColor);
+  border-color: var(--accentColor);
+  color: #000;
+  font-weight: 600;
 }
 
 /* Custom contribution calendar (rendered from our serverless endpoint so it can

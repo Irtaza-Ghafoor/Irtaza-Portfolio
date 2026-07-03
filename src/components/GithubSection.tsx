@@ -49,9 +49,14 @@ interface UserProfile {
   public_repos?: number;
   followers?: number;
   html_url: string;
+  created_at?: string;
 }
 
 const username = "Kashif-Khokhar";
+
+// The calendar defaults to the current year; the selector lets you page back
+// through earlier years (down to the account's join year).
+const CURRENT_YEAR = new Date().getFullYear();
 
 // Shown when the GitHub API is unavailable (e.g. the 60 req/hour unauthenticated
 // rate limit). Keeps the card looking right; the follower/repo counts are left
@@ -69,6 +74,51 @@ const GithubSection: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [contribDays, setContribDays] = useState<ContribDay[]>([]);
   const [totalContributions, setTotalContributions] = useState<number>(0);
+  const [selectedYear, setSelectedYear] = useState<number>(CURRENT_YEAR);
+
+  // Contributions are re-fetched whenever the selected year changes. They come
+  // from our own serverless function, which uses an authenticated GitHub token
+  // to include PRIVATE-repo contributions (so the total matches the profile). If
+  // that endpoint isn't available — e.g. the Vite dev server has no serverless
+  // runtime — fall back to the public API directly so the calendar still renders
+  // (public-only count).
+  useEffect(() => {
+    let cancelled = false;
+    // Reset to the loading state so switching years doesn't show stale squares.
+    setContribDays([]);
+    setTotalContributions(0);
+
+    const applyData = (total: number, days: ContribDay[]) => {
+      if (cancelled) return;
+      setTotalContributions(total > 0 ? total : days.length ? -1 : 0);
+      setContribDays(days);
+    };
+
+    fetch(`/api/github-contributions?year=${selectedYear}`)
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .then((data) => applyData(data.total, data.days || []))
+      .catch(() => {
+        fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=${selectedYear}`)
+          .then((res) => res.json())
+          .then((data) => {
+            const days: ContribDay[] = (data.contributions || []).map((d: any) => ({
+              date: d.date,
+              count: d.count,
+              level: d.level ?? 0,
+            }));
+            applyData(data?.total?.[selectedYear] ?? 0, days);
+          })
+          .catch((err) => {
+            if (cancelled) return;
+            console.error("Contributions fetch error:", err);
+            setTotalContributions(-1); // Indicator for "Recent contributions"
+          });
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedYear]);
 
   useEffect(() => {
     // Fetch profile. A rate-limited/error response is still JSON (e.g.
@@ -78,36 +128,6 @@ const GithubSection: React.FC = () => {
       .then((res) => res.json())
       .then((data) => setProfile(data && data.login ? data : fallbackProfile))
       .catch(() => setProfile(fallbackProfile));
-
-    // Contributions come from our own serverless function, which uses an
-    // authenticated GitHub token to include PRIVATE-repo contributions (so the
-    // total matches the profile). If that endpoint isn't available — e.g. the
-    // Vite dev server has no serverless runtime — fall back to the public API
-    // directly so the calendar still renders (public-only count).
-    const applyData = (total: number, days: ContribDay[]) => {
-      setTotalContributions(total > 0 ? total : days.length ? -1 : 0);
-      setContribDays(days);
-    };
-
-    fetch("/api/github-contributions")
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .then((data) => applyData(data.total, data.days || []))
-      .catch(() => {
-        fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`)
-          .then((res) => res.json())
-          .then((data) => {
-            const days: ContribDay[] = (data.contributions || []).map((d: any) => ({
-              date: d.date,
-              count: d.count,
-              level: d.level ?? 0,
-            }));
-            applyData(data?.total?.lastYear ?? 0, days);
-          })
-          .catch((err) => {
-            console.error("Contributions fetch error:", err);
-            setTotalContributions(-1); // Indicator for "Recent contributions"
-          });
-      });
 
     // Fetch top 3 repos
     fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=10`)
@@ -141,6 +161,17 @@ const GithubSection: React.FC = () => {
     ? new Date(`${weeks[0][0].date}T00:00:00`).getDay()
     : 0;
 
+  // Year buttons: current year back to the account's join year (falling back to
+  // a short recent range when the join date isn't known).
+  const years = useMemo(() => {
+    const startYear = profile?.created_at
+      ? new Date(profile.created_at).getFullYear()
+      : CURRENT_YEAR - 3;
+    const list: number[] = [];
+    for (let y = CURRENT_YEAR; y >= startYear; y--) list.push(y);
+    return list;
+  }, [profile]);
+
   if (!profile) return null;
 
   return (
@@ -153,11 +184,24 @@ const GithubSection: React.FC = () => {
         <div className="calendar-header">
            <span>
              {totalContributions > 0
-               ? `${totalContributions} contributions in the last year`
+               ? `${totalContributions} contributions in ${selectedYear}`
                : totalContributions < 0
-                 ? "Recent contributions"
+                 ? `Contributions in ${selectedYear}`
                  : "Loading contributions..."}
            </span>
+           <div className="year-selector">
+             {years.map((year) => (
+               <button
+                 key={year}
+                 type="button"
+                 data-cursor="disable"
+                 className={`year-btn${year === selectedYear ? " active" : ""}`}
+                 onClick={() => setSelectedYear(year)}
+               >
+                 {year}
+               </button>
+             ))}
+           </div>
         </div>
 
         {weeks.length > 0 && (
