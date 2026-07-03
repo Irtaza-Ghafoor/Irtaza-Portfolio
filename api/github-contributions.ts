@@ -2,6 +2,12 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const USERNAME = 'Kashif-Khokhar';
 
+// GitHub buckets each contribution into a day using the account's timezone, so
+// the year boundaries must be expressed in that same offset — otherwise a few
+// contributions near midnight on Jan 1 fall outside a UTC window and the yearly
+// total comes up short. Set this to your GitHub timezone (PKT = +05:00).
+const TZ_OFFSET = '+05:00';
+
 // GitHub's 5 contribution levels → palette indices (0–4). The frontend maps
 // these onto the teal theme, so we only pass the level, never a hex colour.
 const LEVEL_MAP: Record<string, number> = {
@@ -94,12 +100,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   let from: string | null = null;
   let to: string | null = null;
   if (isYear) {
-    from = `${rawYear}-01-01T00:00:00Z`;
+    from = `${rawYear}-01-01T00:00:00${TZ_OFFSET}`;
     // Clamp the end to "now" for the current (in-progress) year so GitHub
-    // doesn't reject a future `to`.
-    const endOfYear = new Date(`${rawYear}-12-31T23:59:59Z`);
+    // doesn't reject a future `to`; full past years run to Dec 31.
+    const endOfYear = new Date(`${rawYear}-12-31T23:59:59${TZ_OFFSET}`);
     const now = new Date();
-    to = (endOfYear > now ? now : endOfYear).toISOString();
+    to = endOfYear > now ? now.toISOString() : `${rawYear}-12-31T23:59:59${TZ_OFFSET}`;
   }
   const publicYear = isYear ? (rawYear as string) : 'last';
 

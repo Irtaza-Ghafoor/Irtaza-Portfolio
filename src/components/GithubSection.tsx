@@ -154,7 +154,24 @@ const GithubSection: React.FC = () => {
     if (profile) ScrollTrigger.refresh();
   }, [profile, contribDays]);
 
-  const weeks = useMemo(() => groupIntoWeeks(contribDays), [contribDays]);
+  // Build the FULL selected year (Jan 1 → Dec 31) and overlay the fetched
+  // counts, so the grid always spans the whole year with future/empty days shown
+  // as blank cells — exactly like GitHub's own calendar. Stays empty while the
+  // fetch is in flight so the "Loading…" header still shows.
+  const weeks = useMemo(() => {
+    if (!contribDays.length) return [];
+    const byDate = new Map(contribDays.map((d) => [d.date, d]));
+    const days: ContribDay[] = [];
+    const cursor = new Date(Date.UTC(selectedYear, 0, 1));
+    const end = new Date(Date.UTC(selectedYear, 11, 31));
+    while (cursor <= end) {
+      const iso = cursor.toISOString().slice(0, 10);
+      days.push(byDate.get(iso) ?? { date: iso, count: 0, level: 0 });
+      cursor.setUTCDate(cursor.getUTCDate() + 1);
+    }
+    return groupIntoWeeks(days);
+  }, [contribDays, selectedYear]);
+
   // Empty cells to pad the top of the first (partial) week column so every row
   // lines up with its weekday.
   const firstWeekOffset = weeks[0]?.length
