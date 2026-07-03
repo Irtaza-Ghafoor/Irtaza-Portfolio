@@ -115,11 +115,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       ? await fromGraphQL(token, from, to)
       : await fromPublic(publicYear);
 
-    // Cache at the edge for an hour (contributions change at most once a day),
-    // serving stale for a day while revalidating — keeps us well under any limit.
+    // Short edge cache so today's contributions surface quickly (the previous
+    // day-long stale window meant the graph could lag a full day behind GitHub).
+    // Authenticated GraphQL allows 5000 req/hr, so a 5-minute cache is plenty
+    // safe — at most ~10 min behind live.
     res.setHeader(
       'Cache-Control',
-      's-maxage=3600, stale-while-revalidate=86400'
+      'public, s-maxage=300, stale-while-revalidate=300'
     );
     return res
       .status(200)
