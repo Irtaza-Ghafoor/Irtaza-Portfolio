@@ -14,6 +14,14 @@
   max-width: var(--cMaxWidth);
 }
 
+/* Fixed + blur elements re-composite on every scroll frame across the whole
+   page. They are hero-only decoration, so drop them once the hero scrolls out
+   (the .hero-out class is toggled from the character ScrollTrigger). */
+body.hero-out .landing-circle1,
+body.hero-out .landing-circle2 {
+  display: none;
+}
+
 .landing-circle1 {
   top: 0%;
   left: 0%;
@@ -25,7 +33,11 @@
   box-shadow: inset -50px 40px 50px rgba(0, 180, 180, 0.6);
   filter: blur(60px);
   border-radius: 50%;
-  animation: loadingCircle 5s linear infinite;
+  /* Static position (was an infinite rotation). Animating transform on a
+     blur(60px) element re-rasterises the whole blurred texture every frame,
+     which is a major cause of hero-section scroll jank. The glow looks the
+     same held still. */
+  transform: translate(-95%, -75%);
 }
 
 .nav-fade {
@@ -65,7 +77,7 @@
   box-shadow: inset -50px 40px 50px rgba(0, 180, 180, 0.6);
   filter: blur(50px);
   border-radius: 50%;
-  animation: loadingCircle2 5s linear infinite;
+  /* Static (was an infinite rotation) — same reason as .landing-circle1. */
 }
 
 @keyframes loadingCircle2 {

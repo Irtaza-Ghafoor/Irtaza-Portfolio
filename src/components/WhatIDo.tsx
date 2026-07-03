@@ -9,23 +9,23 @@ const WhatIDo = () => {
     containerRef.current[index] = el;
   };
   useEffect(() => {
-    if (ScrollTrigger.isTouch) {
-      containerRef.current.forEach((container) => {
-        if (container) {
-          container.classList.remove("what-noTouch");
-          container.addEventListener("click", () => handleClick(container));
-        }
-      });
-    }
-    return () => {
-      containerRef.current.forEach((container) => {
-        if (container) {
-          container.removeEventListener("click", () => {
-            if (container) handleClick(container);
-          });
-        }
-      });
-    };
+    // Touch / no-hover devices get the tap-accordion. `ScrollTrigger.isTouch`
+    // alone is unreliable at mount, so also check the pointer/hover media
+    // queries (true on phones). Store the exact handlers so cleanup works.
+    const isTouch =
+      ScrollTrigger.isTouch === 1 ||
+      window.matchMedia("(hover: none), (pointer: coarse)").matches;
+    if (!isTouch) return;
+
+    const cleanups: (() => void)[] = [];
+    containerRef.current.forEach((container) => {
+      if (!container) return;
+      container.classList.remove("what-noTouch");
+      const handler = () => handleClick(container);
+      container.addEventListener("click", handler);
+      cleanups.push(() => container.removeEventListener("click", handler));
+    });
+    return () => cleanups.forEach((fn) => fn());
   }, []);
   return (
     <div className="whatIDO">

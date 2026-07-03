@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/b8d5b936-d273-4ce6-9083-a79f46d06d94/scratchpad/cap.mjs C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/b8d5b936-d273-4ce6-9083-a79f46d06d94/scratchpad/m_career2.png career-section)",
+      "Bash(node C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/b8d5b936-d273-4ce6-9083-a79f46d06d94/scratchpad/cap.mjs C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/b8d5b936-d273-4ce6-9083-a79f46d06d94/scratchpad/m_whatido.png whatIDO)"
+    ]
+  }
+}

@@ -21,16 +21,31 @@ const MainContainer = ({ children }: PropsWithChildren) => {
   );
 
   useEffect(() => {
+    // Run once on mount to split the text and set the initial view.
+    setSplitText();
+    setIsDesktopView(window.innerWidth > 1024);
+
+    // Only react to real WIDTH changes. Mobile browsers fire `resize` on every
+    // scroll (the address bar collapsing changes viewport height); re-splitting
+    // all headings on each of those events is what makes downward scrolling
+    // stutter. Height-only resizes are ignored, and width changes are debounced.
+    let lastWidth = window.innerWidth;
+    let resizeTimer: number;
     const resizeHandler = () => {
-      setSplitText();
-      setIsDesktopView(window.innerWidth > 1024);
+      if (window.innerWidth === lastWidth) return;
+      lastWidth = window.innerWidth;
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        setSplitText();
+        setIsDesktopView(window.innerWidth > 1024);
+      }, 200);
     };
-    resizeHandler();
     window.addEventListener("resize", resizeHandler);
     return () => {
       window.removeEventListener("resize", resizeHandler);
+      window.clearTimeout(resizeTimer);
     };
-  }, [isDesktopView]);
+  }, []);
 
   return (
     <div className="container-main">

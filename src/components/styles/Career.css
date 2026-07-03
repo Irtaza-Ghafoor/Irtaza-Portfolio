@@ -8,27 +8,11 @@
   opacity: 1;
   height: auto;
   margin: auto;
+  /* Compensates the desktop GSAP parallax (career-section is scrubbed y:0 -> 20%
+     in GsapScroll.ts). Without it, the shifted section overlaps Certificates.
+     Reset to 0 on <=1025px where the parallax is disabled. */
   margin-bottom: 250px;
-  padding: 120px 0px;
-}
-
-.career-section h2 {
-  font-size: 70px;
-  line-height: 70px;
-  font-weight: 400;
-  text-align: center;
-  background: linear-gradient(0deg, #0d9488, #ffffff);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  margin-top: 50px;
-  margin-bottom: 90px;
-}
-
-.career-section h2>span {
-  font-family: "Geist", sans-serif;
-  font-weight: 300;
+  padding: var(--section-space) 20px;
 }
 
 .career-info {
@@ -143,11 +127,6 @@
 }
 
 @media only screen and (max-width: 1400px) {
-  .career-section h2 {
-    font-size: 50px;
-    line-height: 50px;
-  }
-
   .career-info h4 {
     font-size: 22px;
     line-height: 24px;
@@ -178,7 +157,7 @@
 
 @media only screen and (max-width: 1025px) {
   .career-section {
-    padding: 70px 0px;
+    padding: 70px 20px;
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -210,14 +189,6 @@
 @media only screen and (max-width: 600px) {
   .career-info {
     margin: 0;
-  }
-
-  .career-section h2 {
-    width: 100%;
-    font-size: 36px;
-    line-height: 40px;
-    margin-top: 0px;
-    margin-bottom: 50px;
   }
 
   .career-info-in {

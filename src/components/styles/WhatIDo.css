@@ -315,7 +315,8 @@
   }
   .what-content {
     padding: 50px;
-    width: 500px;
+    /* Was 500px, which overflowed the ~420px .what-box on 901-1024 tablets. */
+    width: 100%;
   }
   .what-content p {
     font-size: 14px;
@@ -338,6 +339,11 @@
     flex-direction: column;
     height: auto;
     min-height: 100vh;
+    /* Match the side inset of the other sections (full width, 20px padding)
+       instead of the narrower 94% + calc(100% - 50px) it used before. */
+    width: 100%;
+    padding: 50px 20px;
+    box-sizing: border-box;
   }
   .what-box h2 {
     margin: 50px 0;
@@ -351,16 +357,19 @@
     height: 750px;
   }
   .what-box {
-    width: 500px;
-    max-width: calc(100% - 50px);
-    margin: auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
   }
   .what-content {
     width: 100%;
+    /* Include padding in the width so width:100% + padding doesn't overflow. */
+    box-sizing: border-box;
   }
   .what-box-in {
     margin-left: 0px;
     height: 700px;
+    width: 100%;
   }
   .what-content h5,
   .what-content-flex {
@@ -405,7 +414,7 @@
     justify-content: left;
   }
   .what-box {
-    max-width: calc(100% - 25px);
+    max-width: 100%;
     margin: 0;
   }
 }
@@ -413,5 +422,57 @@
   .what-box h2 {
     font-size: 7rem;
     line-height: 6.8rem;
+  }
+}
+
+/* On phones each card starts collapsed (title + icon only) and expands on tap.
+   The tap toggles .what-content-active on the card (see WhatIDo.tsx). Cards
+   size to their content instead of the fixed-percentage desktop heights. */
+@media only screen and (max-width: 900px) {
+  .what-box-in,
+  .what-box:last-child {
+    height: auto;
+    gap: 16px;
+  }
+  .what-content,
+  .what-noTouch:hover,
+  .what-content-active,
+  .what-noTouch:hover ~ .what-content,
+  .what-box-in:hover .what-noTouch:not(:hover),
+  .what-content.what-sibling {
+    min-height: auto;
+    height: auto;
+    padding: 20px 20px 22px;
+    cursor: pointer;
+  }
+  .what-content-in {
+    height: auto;
+    overflow: hidden;
+  }
+  /* Title row: keep the heading clear of the icon on the right. */
+  .what-content-in h3 {
+    padding-right: 46px;
+    font-size: 22px;
+  }
+  /* Topic icon sits tidily at the top-right of the header in both states. */
+  .what-icon {
+    top: 20px;
+    right: 18px;
+    font-size: 24px;
+  }
+  /* Collapsed by default: hide the detail list. */
+  .what-content-in ul {
+    display: none;
+    margin: 14px 0 0;
+  }
+  /* Expanded when tapped (or hovered on a non-touch narrow screen). */
+  .what-content-active .what-content-in ul,
+  .what-noTouch:hover .what-content-in ul {
+    display: block;
+  }
+  /* Drop the boxed corner-arrow on mobile — it crowded the icon. The card
+     expanding on tap is the feedback. */
+  .what-arrow {
+    display: none;
   }
 }

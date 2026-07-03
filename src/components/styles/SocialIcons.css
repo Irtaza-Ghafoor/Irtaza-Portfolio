@@ -108,10 +108,18 @@ div.resume-button span {
   }
 }
 
-@media only screen and (max-width: 480px) {
-  .social-icons {
-    left: 15px;
+/* On phones the content is full-width, so the fixed social stack and the
+   fixed resume button overlap it (the resume button also sat over the contact
+   form / footer and intercepted taps). Hide both here — the same links live in
+   the Contact section and footer. */
+@media only screen and (max-width: 899px) {
+  .social-icons,
+  .resume-button {
+    display: none;
   }
+}
+
+@media only screen and (max-width: 480px) {
   .resume-button {
     right: 15px;
   }

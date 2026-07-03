@@ -3,19 +3,7 @@
   position: relative;
   z-index: 1;
   background-color: var(--backgroundColor);
-  padding: 80px 0;
-}
-
-.work-section h2 {
-  font-size: 70px;
-  font-weight: 500;
-  margin-top: 0;
-  margin-bottom: 50px;
-  text-align: center;
-}
-
-.work-section h2>span {
-  color: var(--accentColor);
+  padding: var(--section-space) 0;
 }
 
 .work-container {
@@ -137,7 +125,9 @@
   font-size: 22px;
   cursor: pointer;
   transition: all 0.3s ease;
-  backdrop-filter: blur(8px);
+  /* backdrop-filter removed: it re-blurs the page behind it on every scroll
+     frame, which stutters the Work section. Solid translucent bg instead. */
+  background: rgba(20, 26, 38, 0.75);
 }
 
 .carousel-arrow:hover {
@@ -251,10 +241,6 @@
 }
 
 @media only screen and (max-width: 1400px) {
-  .work-section h2 {
-    font-size: 50px;
-  }
-
   .carousel-details h4 {
     font-size: 22px;
   }
@@ -301,37 +287,28 @@
   }
 
   .carousel-arrow {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     font-size: 18px;
     top: auto;
-    bottom: -60px;
+    bottom: 0;
     transform: none;
   }
 
   .carousel-arrow-left {
-    left: calc(50% - 60px);
+    left: 8px;
   }
 
   .carousel-arrow-right {
-    right: calc(50% - 60px);
+    right: 8px;
   }
 
   .carousel-dots {
-    margin-top: 80px;
+    margin-top: 46px;
   }
 }
 
 @media only screen and (max-width: 900px) {
-  .work-section {
-    padding: 50px 0;
-  }
-
-  .work-section h2 {
-    font-size: 40px;
-    margin-bottom: 30px;
-  }
-
   .carousel-number h3 {
     font-size: 35px;
   }
@@ -350,5 +327,15 @@
 
   .work-image img {
     max-height: 250px;
+  }
+
+  /* Bigger hit area for the pager dots on touch screens. */
+  .carousel-dots {
+    gap: 16px;
+  }
+
+  .carousel-dot {
+    width: 14px;
+    height: 14px;
   }
 }

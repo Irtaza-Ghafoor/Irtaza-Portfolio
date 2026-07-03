@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
-import { EffectComposer, N8AO } from "@react-three/postprocessing";
 import {
   BallCollider,
   Physics,
@@ -32,9 +31,9 @@ const imageUrls = [
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 
-const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
+const sphereGeometry = new THREE.SphereGeometry(1, 24, 24);
 
-const spheres = [...Array(50)].map(() => ({
+const spheres = [...Array(28)].map(() => ({
   scale: [0.7, 1, 0.8, 1, 1][Math.floor(Math.random() * 5)],
 }));
 
@@ -88,8 +87,6 @@ function SphereGeo({
         args={[0.15 * scale, 0.275 * scale]}
       />
       <mesh
-        castShadow
-        receiveShadow
         scale={scale}
         geometry={sphereGeometry}
         material={material}
@@ -133,32 +130,28 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
 }
 
 const TechStack = () => {
-  const [isActive, setIsActive] = useState(false);
+  const [inView, setInView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
+  // Only run the WebGL render loop while the section is actually on screen —
+  // otherwise this second 3D context renders every frame for the whole page.
+  // The same visibility flag also gates the physics simulation: there's no
+  // point simulating (or reading pointer input) while the section is off
+  // screen. Driving this from the IntersectionObserver replaces a global
+  // `scroll` listener that used to call getBoundingClientRect() on every
+  // scroll frame — a forced layout read that stuttered every section.
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const threshold = document
-        .getElementById("work")!
-        .getBoundingClientRect().top;
-      setIsActive(scrollY > threshold);
-    };
-    document.querySelectorAll(".header a").forEach((elem) => {
-      const element = elem as HTMLAnchorElement;
-      element.addEventListener("click", () => {
-        const interval = setInterval(() => {
-          handleScroll();
-        }, 10);
-        setTimeout(() => {
-          clearInterval(interval);
-        }, 1000);
-      });
-    });
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "200px 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
+
+  const isActive = inView;
   const materials = useMemo(() => {
     return textures.map(
       (texture) =>
@@ -175,29 +168,33 @@ const TechStack = () => {
   }, []);
 
   return (
-    <div className="techstack">
+    <div className="techstack" ref={containerRef}>
       <h2>My <span>Techstack</span></h2>
 
       <Canvas
-        shadows
+        frameloop={inView ? "always" : "never"}
+        dpr={[1, 1.25]}
         gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
-        camera={{ 
-          position: [0, 0, window.innerWidth < 768 ? 30 : 20], 
-          fov: window.innerWidth < 768 ? 45 : 32.5, 
-          near: 1, 
-          far: 100 
+        camera={{
+          position: [0, 0, window.innerWidth < 768 ? 30 : 20],
+          fov: window.innerWidth < 768 ? 45 : 32.5,
+          near: 1,
+          far: 100
         }}
         onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
         className="tech-canvas"
       >
+        {/* Shadows and the N8AO screen-space ambient-occlusion pass were removed:
+            together they were the heaviest per-frame GPU cost on the page and,
+            because this section is full-height, they stuttered scrolling both
+            here and into the GitHub section below it. The HDR environment +
+            physical materials keep the reflective look. */}
         <ambientLight intensity={1} />
         <spotLight
           position={[20, 20, 25]}
           penumbra={1}
           angle={0.2}
           color="white"
-          castShadow
-          shadow-mapSize={[512, 512]}
         />
         <directionalLight position={[0, 5, -4]} intensity={2} />
         <Physics gravity={[0, 0, 0]}>
@@ -216,9 +213,6 @@ const TechStack = () => {
           environmentIntensity={0.5}
           environmentRotation={[0, 4, 2]}
         />
-        <EffectComposer enableNormalPass={false}>
-          <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
-        </EffectComposer>
       </Canvas>
     </div>
   );

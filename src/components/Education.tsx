@@ -18,7 +18,7 @@ const Education = () => {
   return (
     <div className="education-section section-container" id="education">
       <div className="education-container">
-        <h2 className="education-title">
+        <h2 className="section-heading">
           Academic <span>Background</span>
         </h2>
         <div className="education-cards">

@@ -23,6 +23,14 @@
   --backgroundColor: #0a0e17;
   --vh: 100vh;
   --vh: 100svh;
+  /* Shared vertical rhythm for standalone content sections */
+  --section-space: 110px;
+}
+
+@media only screen and (max-width: 900px) {
+  :root {
+    --section-space: 64px;
+  }
 }
 
 h1,
@@ -109,9 +117,7 @@ body {
   position: relative;
   overflow: clip;
   height: var(--vh);
-  margin: auto;
-  margin-top: 50px;
-  margin-bottom: -100px;
+  margin: 0 auto;
 }
 
 .techstack h2 {

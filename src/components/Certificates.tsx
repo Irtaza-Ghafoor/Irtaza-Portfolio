@@ -68,13 +68,16 @@ const Certificates = () => {
   return (
     <div className="certificates-section section-container" id="certificates">
       <div className="certificates-container">
-        <h2>
+        <h2 className="section-heading">
           Certifications <span>&</span>
           <br /> Achievements
         </h2>
         <div className="certificates-grid">
           {certificates.map((cert, index) => (
             <div className="certificate-card" key={index}>
+              <a href={cert.link} className="certificate-link" target="_blank" rel="noopener noreferrer" aria-label={`View ${cert.title} certificate`}>
+                <FiExternalLink />
+              </a>
               <div className="certificate-content">
                 <div className="certificate-icon">
                   <FiAward />
@@ -84,9 +87,6 @@ const Certificates = () => {
                   <h5>{cert.issuer}</h5>
                   <p>{cert.date}</p>
                 </div>
-                <a href={cert.link} className="certificate-link" target="_blank" rel="noopener noreferrer">
-                  <FiExternalLink />
-                </a>
               </div>
             </div>
           ))}

@@ -10,25 +10,34 @@ const Loading = ({ percent }: { percent: number }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-  if (percent >= 100) {
-    setTimeout(() => {
-      setLoaded(true);
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 1000);
-    }, 600);
-  }
+  // Once we hit 100%, reveal the hero promptly. These used to total ~2500ms of
+  // dead waiting after the bar filled, which felt like the page was stuck.
+  // Scheduling in an effect (not during render) also stops the timers from
+  // being re-created on every re-render.
+  useEffect(() => {
+    if (percent < 100) return;
+    // At 100%: briefly settle, show the "Welcome" text, hold on it for ~2s so
+    // it can be read, then start the exit wipe that reveals the hero.
+    const t1 = setTimeout(() => setLoaded(true), 150);
+    const t2 = setTimeout(() => setIsLoaded(true), 150 + 2000);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [percent]);
 
   useEffect(() => {
     import("./utils/initialFX").then((module) => {
       if (isLoaded) {
         setClicked(true);
+        // 800ms = the loading-wrap expand-wipe duration (Loading.css), so the
+        // screen is fully covered before it unmounts and the hero shows.
         setTimeout(() => {
           if (module.initialFX) {
             module.initialFX();
           }
           setIsLoading(false);
-        }, 900);
+        }, 800);
       }
     });
   }, [isLoaded]);

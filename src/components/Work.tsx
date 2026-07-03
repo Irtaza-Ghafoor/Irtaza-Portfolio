@@ -81,7 +81,7 @@ const Work = () => {
   return (
     <div className="work-section" id="work">
       <div className="work-container section-container">
-        <h2>
+        <h2 className="section-heading">
           My <span>Work</span>
         </h2>
 

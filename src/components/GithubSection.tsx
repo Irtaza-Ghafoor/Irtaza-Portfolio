@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GitHubCalendar } from "react-github-calendar";
 import { FaRegStar, FaCodeBranch } from "react-icons/fa";
 import { MdArrowOutward } from "react-icons/md";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./styles/GithubSection.css";
 
 interface Repo {
@@ -16,26 +17,40 @@ interface Repo {
 
 interface UserProfile {
   avatar_url: string;
-  name: string;
+  name: string | null;
   login: string;
-  bio: string;
-  public_repos: number;
-  followers: number;
+  bio: string | null;
+  public_repos?: number;
+  followers?: number;
   html_url: string;
 }
+
+const username = "Kashif-Khokhar";
+
+// Shown when the GitHub API is unavailable (e.g. the 60 req/hour unauthenticated
+// rate limit). Keeps the card looking right; the follower/repo counts are left
+// out so we never display wrong numbers.
+const fallbackProfile: UserProfile = {
+  avatar_url: `https://github.com/${username}.png`,
+  name: "Kashif Ali",
+  login: username,
+  bio: "Full Stack Developer | Building scalable web solutions.",
+  html_url: `https://github.com/${username}`,
+};
 
 const GithubSection: React.FC = () => {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [totalContributions, setTotalContributions] = useState<number>(0);
-  const username = "Kashif-Khokhar";
 
   useEffect(() => {
-    // Fetch profile
+    // Fetch profile. A rate-limited/error response is still JSON (e.g.
+    // { message: "..." }) but has no `login`, so only accept a real profile;
+    // otherwise fall back to static details instead of an empty card.
     fetch(`https://api.github.com/users/${username}`)
       .then((res) => res.json())
-      .then((data) => setProfile(data))
-      .catch(err => console.error("Profile fetch error:", err));
+      .then((data) => setProfile(data && data.login ? data : fallbackProfile))
+      .catch(() => setProfile(fallbackProfile));
 
     // Fetch total contributions
     const fetchContributions = async () => {
@@ -69,6 +84,8 @@ const GithubSection: React.FC = () => {
     fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=10`)
       .then((res) => res.json())
       .then((data: Repo[]) => {
+        // A rate-limited response is an object, not an array — bail cleanly.
+        if (!Array.isArray(data)) return;
         const preferred = ["Currency-Converter", "Chess", "ToDo-List", "Kashif-Portfolio"];
         let selected = data.filter(r => preferred.includes(r.name));
         if (selected.length < 3) {
@@ -80,11 +97,18 @@ const GithubSection: React.FC = () => {
       .catch(err => console.error("Repos fetch error:", err));
   }, []);
 
+  // This section renders null until the profile fetch resolves, so mounting it
+  // changes the total page height. Refresh ScrollTriggers (nav active-state,
+  // hero timelines) so they recalculate against the new layout.
+  useEffect(() => {
+    if (profile) ScrollTrigger.refresh();
+  }, [profile]);
+
   if (!profile) return null;
 
   return (
     <section className="github-section section-container" id="github">
-      <h2 className="github-title">
+      <h2 className="section-heading">
         GitHub <span>Contributions</span>
       </h2>
 
@@ -137,21 +161,31 @@ const GithubSection: React.FC = () => {
 
       <div className="github-profile-card">
         <div className="profile-info">
-          <img src={profile.avatar_url} alt="Profile" className="profile-avatar" />
+          {/* github.com/<user>.png always serves the avatar (no API / rate
+              limit), so it never breaks like the API-provided URL can. */}
+          <img
+            src={`https://github.com/${username}.png?size=200`}
+            alt={profile.name || username}
+            className="profile-avatar"
+            loading="lazy"
+          />
           <div className="profile-text">
             <h4>{profile.name || username}</h4>
-            <p>@{profile.login}</p>
+            <p className="profile-handle">@{profile.login}</p>
+            <div className="profile-bio">
+              <p>{profile.bio || "Full Stack Developer | Building scalable web solutions."}</p>
+            </div>
           </div>
         </div>
-        
-        <div className="profile-bio">
-          <p>{profile.bio || "Full Stack Developer | Building scalable web solutions."}</p>
-        </div>
 
-        <div className="profile-stats">
-          <span>{profile.followers} Followers</span>
-          <span>{profile.public_repos} Repos</span>
-        </div>
+        {/* Only shown when we have real counts — never fake numbers. */}
+        {typeof profile.followers === "number" &&
+          typeof profile.public_repos === "number" && (
+            <div className="profile-stats">
+              <span>{profile.followers} Followers</span>
+              <span>{profile.public_repos} Repos</span>
+            </div>
+          )}
 
         <a href={profile.html_url} target="_blank" rel="noopener noreferrer" className="view-profile-btn">
           View Profile <MdArrowOutward />

@@ -1,5 +1,6 @@
 .header {
   display: flex;
+  align-items: center;
   max-width: var(--cMaxWidth);
   width: var(--cWidth);
   justify-content: space-between;
@@ -11,6 +12,21 @@
   transform: translateX(-50%);
   top: 0;
   z-index: 9999;
+  border: 1px solid transparent;
+  /* Solid translucent bg — NOT backdrop-filter — so the pill doesn't re-blur
+     the page behind it on every scroll frame (that reintroduces scroll jank). */
+  transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.header.scrolled {
+  top: 12px;
+  padding: 12px 26px;
+  background: rgba(13, 18, 28, 0.9);
+  border-color: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.35);
 }
 .header ul {
   font-size: 12px;
@@ -30,20 +46,41 @@
   font-weight: 600;
   cursor: pointer;
 }
-.navbar-connect {
-  position: absolute;
-  display: none;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 15px;
-  letter-spacing: 1px;
-  font-weight: 500;
-}
 .navbar-title {
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.2px;
+  transition: color 0.3s ease;
+}
+
+.navbar-title span {
+  color: var(--accentColor);
+}
+
+.navbar-title:hover {
+  color: var(--accentColor);
+}
+
+/* Active section indicator: accent colour + an underline dash under the link */
+.header ul a {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.header ul a.nav-active {
+  color: var(--accentColor);
+}
+
+.header ul a.nav-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accentColor);
+  box-shadow: 0 0 8px rgba(var(--accentColorRgb), 0.6);
 }
 
 .mobile-toggle {
@@ -52,7 +89,9 @@
   border: none;
   color: #fff;
   cursor: pointer;
-  padding: 5px;
+  /* ~44px hit area around the 24px icon for comfortable tapping. */
+  padding: 10px;
+  margin: -10px;
   z-index: 10000;
   transition: 0.3s ease;
 }
@@ -60,32 +99,146 @@
 .mobile-toggle:hover {
   color: var(--accentColor);
 }
+/* The backdrop, drawer footer and link icons only exist on mobile. */
+.nav-overlay,
+.nav-drawer-footer,
+.nav-link-icon {
+  display: none;
+}
+
 @media only screen and (max-width: 899px) {
+  /* Dimmed, tap-to-close backdrop behind the drawer. */
+  .nav-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 6, 12, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 9998;
+  }
+  .nav-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
   .header ul {
     position: fixed;
     top: 0;
-    right: -100%;
-    width: 280px;
+    right: 0;
+    transform: translateX(100%);
+    width: min(74vw, 290px);
     height: 100vh;
-    background: rgba(10, 14, 23, 0.98);
-    backdrop-filter: blur(15px);
+    height: 100dvh;
+    background: linear-gradient(165deg, #0e1521 0%, #070b12 62%);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
     flex-direction: column;
-    padding: 100px 40px;
+    justify-content: flex-start;
     align-items: flex-start;
-    gap: 35px;
-    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
-    margin-bottom: 0;
+    padding: 104px 40px 40px;
+    gap: 30px;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -24px 0 60px rgba(0, 0, 0, 0.55);
+    margin: 0;
     z-index: 9999;
   }
 
   .header ul.nav-open {
-    right: 0;
+    transform: translateX(0);
   }
 
+  /* Links slide + fade in with a stagger once the drawer opens. */
   .header ul li {
-    font-size: 22px;
-    letter-spacing: 2px;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  .header ul.nav-open li {
+    animation: navItemIn 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+  .header ul.nav-open li:nth-child(1) { animation-delay: 0.12s; }
+  .header ul.nav-open li:nth-child(2) { animation-delay: 0.19s; }
+  .header ul.nav-open li:nth-child(3) { animation-delay: 0.26s; }
+  .header ul.nav-open li:nth-child(4) { animation-delay: 0.33s; }
+  .header ul.nav-open li:nth-child(5) { animation-delay: 0.44s; }
+
+  .header ul a[data-href] {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    padding: 4px 0;
+    color: #eae5ec;
+  }
+  /* Icon before each link. */
+  .nav-link-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--accentColor);
+    opacity: 0.85;
+    flex-shrink: 0;
+  }
+  .header ul a[data-href].nav-active {
+    color: var(--accentColor);
+  }
+  .header ul a[data-href].nav-active .nav-link-icon {
+    opacity: 1;
+  }
+  /* Drop the desktop underline inside the drawer (the accent colour + index
+     already mark the active item). */
+  .header ul a[data-href].nav-active::after {
+    display: none;
+  }
+
+  /* Footer pinned to the bottom of the drawer. */
+  .nav-drawer-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .nav-drawer-socials {
+    display: flex;
+    gap: 14px;
+  }
+  .nav-drawer-socials a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    border-radius: 50%;
+    color: #eae5ec;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  }
+  .nav-drawer-socials a:hover {
+    color: var(--accentColor);
+    border-color: var(--accentColor);
+    transform: translateY(-2px);
+  }
+  .nav-drawer-mail {
+    font-size: 12.5px;
+    font-weight: 300;
+    color: #9ba3af;
+    word-break: break-all;
+  }
+}
+
+@keyframes navItemIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -109,20 +262,12 @@
     font-size: 16px;
   }
 }
-@media only screen and (min-width: 900px) {
-  .navbar-connect {
-    display: block;
-  }
-}
 @media only screen and (min-width: 1200px) {
   .header {
     padding: 35px 0px;
   }
   .header ul {
     column-gap: 80px;
-    font-size: 16px;
-  }
-  .navbar-connect {
     font-size: 16px;
   }
   .navbar-title {
