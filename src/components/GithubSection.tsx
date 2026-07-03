@@ -129,21 +129,22 @@ const GithubSection: React.FC = () => {
       .then((data) => setProfile(data && data.login ? data : fallbackProfile))
       .catch(() => setProfile(fallbackProfile));
 
-    // Fetch top 3 repos
-    fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=10`)
-      .then((res) => res.json())
+    // Fetch the first 3 PINNED repos (via our serverless GraphQL endpoint —
+    // pinned repos aren't available through the REST API). Falls back to recent
+    // public repos when the endpoint isn't available, e.g. the Vite dev server.
+    fetch("/api/github-repos")
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
       .then((data: Repo[]) => {
-        // A rate-limited response is an object, not an array — bail cleanly.
-        if (!Array.isArray(data)) return;
-        const preferred = ["Currency-Converter", "Chess", "ToDo-List", "Kashif-Portfolio"];
-        let selected = data.filter(r => preferred.includes(r.name));
-        if (selected.length < 3) {
-           const others = data.filter(r => !preferred.includes(r.name));
-           selected = [...selected, ...others].slice(0, 3);
-        }
-        setRepos(selected);
+        if (Array.isArray(data)) setRepos(data.slice(0, 3));
       })
-      .catch(err => console.error("Repos fetch error:", err));
+      .catch(() => {
+        fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`)
+          .then((res) => res.json())
+          .then((data: Repo[]) => {
+            if (Array.isArray(data)) setRepos(data.slice(0, 3));
+          })
+          .catch((err) => console.error("Repos fetch error:", err));
+      });
   }, []);
 
   // This section renders null until the profile fetch resolves, and the calendar
