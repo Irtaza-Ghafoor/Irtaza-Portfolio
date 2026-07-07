@@ -44,10 +44,10 @@ I'm **Kashif Ali**, a Full-Stack Developer and Computer Science student at Super
 
 ## Tech Stack 🛠️
 
-- **Languages:** TypeScript, JavaScript, HTML5, CSS3
+- **Languages:** TypeScript, JavaScript, PHP, HTML5, CSS3
 - **Frontend:** React, Next.js, Vite, Tailwind CSS, Framer Motion
 - **Animations & 3D:** GSAP, Three.js, React Three Fiber
-- **Backend & Database:** Node.js, Express.js, MongoDB, MySQL
+- **Backend & Database:** Node.js, Express.js, PHP, MongoDB, MySQL
 - **Tools:** Git, GitHub, VS Code, Vercel
 
 ## Contact & Connect 🔗
