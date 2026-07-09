@@ -266,6 +266,11 @@
   .mobile-toggle {
     display: none;
   }
+  /* Resume already lives in the footer on desktop — the drawer-only nav item
+     would otherwise duplicate it in the top bar. */
+  .mobile-resume-link {
+    display: none;
+  }
   .header {
     padding: 20px 0px;
   }
