@@ -42,7 +42,7 @@ type SphereProps = {
   vec?: THREE.Vector3;
   scale: number;
   r?: typeof THREE.MathUtils.randFloatSpread;
-  material: THREE.MeshPhysicalMaterial;
+  texture: THREE.Texture;
   isActive: boolean;
 };
 
@@ -50,7 +50,7 @@ function SphereGeo({
   vec = new THREE.Vector3(),
   scale,
   r = THREE.MathUtils.randFloatSpread,
-  material,
+  texture,
   isActive,
 }: SphereProps) {
   const api = useRef<RapierRigidBody | null>(null);
@@ -87,12 +87,20 @@ function SphereGeo({
         position={[0, 0, 1.2 * scale]}
         args={[0.15 * scale, 0.275 * scale]}
       />
-      <mesh
-        scale={scale}
-        geometry={sphereGeometry}
-        material={material}
-        rotation={[0.3, 1, 1]}
-      />
+      <group scale={scale} rotation={[0.3, 1, 1]}>
+        <mesh geometry={sphereGeometry}>
+          <meshStandardMaterial color="#ffffff" roughness={0.3} metalness={0.1} />
+        </mesh>
+        <mesh geometry={sphereGeometry} scale={1.001}>
+          <meshStandardMaterial
+            map={texture}
+            transparent={false}
+            alphaTest={0.5}
+            roughness={0.3}
+            metalness={0.1}
+          />
+        </mesh>
+      </group>
     </RigidBody>
   );
 }
@@ -153,23 +161,7 @@ const TechStack = () => {
   }, []);
 
   const isActive = inView;
-  const materials = useMemo(() => {
-    return textures.map(
-      (texture) =>
-        new THREE.MeshPhysicalMaterial({
-          map: texture,
-          emissive: "#ffffff",
-          emissiveMap: texture,
-          emissiveIntensity: 0.3,
-          metalness: 0.5,
-          roughness: 1,
-          clearcoat: 0.1,
-          transparent: true,
-          alphaTest: 0.4,
-          depthWrite: true,
-        })
-    );
-  }, []);
+
 
   return (
     <div className="techstack" ref={containerRef}>
@@ -207,7 +199,7 @@ const TechStack = () => {
             <SphereGeo
               key={i}
               {...props}
-              material={materials[Math.floor(Math.random() * materials.length)]}
+              texture={textures[i % textures.length]}
               isActive={isActive}
             />
           ))}
