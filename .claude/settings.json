@@ -2,7 +2,17 @@
   "permissions": {
     "allow": [
       "Bash(node C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/b8d5b936-d273-4ce6-9083-a79f46d06d94/scratchpad/cap.mjs C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/b8d5b936-d273-4ce6-9083-a79f46d06d94/scratchpad/m_career2.png career-section)",
-      "Bash(node C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/b8d5b936-d273-4ce6-9083-a79f46d06d94/scratchpad/cap.mjs C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/b8d5b936-d273-4ce6-9083-a79f46d06d94/scratchpad/m_whatido.png whatIDO)"
+      "Bash(node C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/b8d5b936-d273-4ce6-9083-a79f46d06d94/scratchpad/cap.mjs C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/b8d5b936-d273-4ce6-9083-a79f46d06d94/scratchpad/m_whatido.png whatIDO)",
+      "Bash(npm ls *)",
+      "Bash(node -e \"require.resolve\\('puppeteer'\\)\")",
+      "Bash(npm root *)",
+      "Bash(node \"C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/f3161bfc-003d-4033-9aab-cea0110aef06/scratchpad/render.cjs\")",
+      "Bash(cp \"C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/f3161bfc-003d-4033-9aab-cea0110aef06/scratchpad/render.cjs\" \"e:/React/Kashif Ali Portfolio/render-resume-tmp.cjs\")",
+      "Bash(node render-resume-tmp.cjs)",
+      "Bash(cp \"C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/f3161bfc-003d-4033-9aab-cea0110aef06/scratchpad/Kashif-Ali-Resume.pdf\" \"e:/React/Kashif Ali Portfolio/public/Kashif-Ali-Resume.pdf\")",
+      "Bash(cp \"C:/Users/user/AppData/Local/Temp/claude/e--React-Kashif-Ali-Portfolio/f3161bfc-003d-4033-9aab-cea0110aef06/scratchpad/Kashif-Ali-Resume.pdf\" \"e:/React/Kashif Ali Portfolio/dist/Kashif-Ali-Resume.pdf\")",
+      "Bash(rm \"e:/React/Kashif Ali Portfolio/render-resume-tmp.cjs\")",
+      "Bash(git status *)"
     ]
   }
 }
