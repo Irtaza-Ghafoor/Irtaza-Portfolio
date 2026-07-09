@@ -164,6 +164,9 @@ const TechStack = () => {
           metalness: 0.5,
           roughness: 1,
           clearcoat: 0.1,
+          transparent: true,
+          alphaTest: 0.4,
+          depthWrite: true,
         })
     );
   }, []);
