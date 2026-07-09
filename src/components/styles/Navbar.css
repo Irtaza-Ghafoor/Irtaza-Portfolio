@@ -173,7 +173,8 @@
   .header ul.nav-open li:nth-child(4) { animation-delay: 0.33s; }
   .header ul.nav-open li:nth-child(5) { animation-delay: 0.44s; }
 
-  .header ul a[data-href] {
+  .header ul a[data-href],
+  .header ul a.resume-link {
     display: flex;
     align-items: center;
     gap: 14px;

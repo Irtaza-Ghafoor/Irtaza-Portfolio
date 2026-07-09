@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FiMenu, FiX, FiUser, FiBriefcase, FiMail } from "react-icons/fi";
+import { FiMenu, FiX, FiUser, FiBriefcase, FiMail, FiFileText } from "react-icons/fi";
 import { FaGithub, FaLinkedinIn, FaXTwitter, FaInstagram } from "react-icons/fa6";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
@@ -168,6 +168,19 @@ const Navbar = () => {
               </a>
             </li>
           ))}
+          
+          <li className="mobile-resume-link">
+            <a
+              className="resume-link"
+              href="/Kashif-Ali-Resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <span className="nav-link-icon"><FiFileText /></span>
+              <HoverLinks text="RESUME" />
+            </a>
+          </li>
 
           {/* Drawer footer (mobile only): socials + email. */}
           <li className="nav-drawer-footer">
