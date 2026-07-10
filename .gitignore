@@ -48,7 +48,6 @@ desktop.ini
 
 # npm
 .npmrc
-package-lock.json
 
 # Backup
 backup/
@@ -57,6 +56,13 @@ backup/
 .cache/
 .eslintcache
 
+# Vercel
+.vercel
+
 # Claude Code (keep shared settings.json, ignore personal/local ones)
 .claude/settings.local.json
 .claude/*.local.json
+
+# Local scratch scripts (never meant to be committed)
+*-tmp.cjs
+*-tmp.js

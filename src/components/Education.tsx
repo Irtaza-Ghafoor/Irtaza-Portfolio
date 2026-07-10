@@ -3,13 +3,20 @@ import { LuGraduationCap } from "react-icons/lu";
 
 const educationData = [
   {
-    degree: "BS Computer Science",
-    institution: "Superior University, Gold Campus",
-    duration: "2023 - 2027",
+    degree: "BS Computer Science (Lateral Entry)",
+    institution: "Bahria University, Lahore Campus",
+    duration: "2025 - 2027",
+    detail: "Current CGPA: 3.60 / 4.00",
+  },
+  {
+    degree: "Associate Degree in Computer Science",
+    institution: "Bahria University, Lahore Campus",
+    duration: "Graduated 2025",
+    detail: "CGPA: 3.84 / 4.00 — Batch Rank 1st, Gold Medalist",
   },
   {
     degree: "F.Sc Pre-Engineering",
-    institution: "Government Graduate College of Science",
+    institution: "Unique College",
     duration: "2021 - 2023",
   },
 ];
@@ -31,6 +38,7 @@ const Education = () => {
                 <h3>{edu.degree}</h3>
                 <p className="institution">{edu.institution}</p>
                 <p className="duration">{edu.duration}</p>
+                {edu.detail && <p className="honor">{edu.detail}</p>}
               </div>
             </div>
           ))}

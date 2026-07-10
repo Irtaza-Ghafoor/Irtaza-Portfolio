@@ -84,15 +84,15 @@ const Contact = () => {
             <div className="contact-box">
               <h4>Email</h4>
               <p>
-                <a href="mailto:kashifalikhokharofficial@gmail.com" data-cursor="disable">
-                  kashifalikhokharofficial@gmail.com
+                <a href="mailto:irtazaahmad2715@gmail.com" data-cursor="disable">
+                  irtazaahmad2715@gmail.com
                 </a>
               </p>
             </div>
             <div className="contact-box">
               <h4>Social</h4>
               <a
-                href="https://github.com/Kashif-Khokhar"
+                href="https://github.com/Irtaza-Ghafoor"
                 target="_blank"
                 data-cursor="disable"
                 className="contact-social"
@@ -100,7 +100,7 @@ const Contact = () => {
                 Github <MdArrowOutward />
               </a>
               <a
-                href="https://www.linkedin.com/in/kashif-ali-khokhar/"
+                href="https://www.linkedin.com/in/irtaza-ahmad-1962602a5/"
                 target="_blank"
                 data-cursor="disable"
                 className="contact-social"
@@ -108,7 +108,7 @@ const Contact = () => {
                 Linkedin <MdArrowOutward />
               </a>
               <a
-                href="https://x.com/Kashif_Khokhar1"
+                href="https://x.com/irtazaghafoor27"
                 target="_blank"
                 data-cursor="disable"
                 className="contact-social"
@@ -116,7 +116,7 @@ const Contact = () => {
                 Twitter <MdArrowOutward />
               </a>
               <a
-                href="https://www.instagram.com/malik._.kashif_khokhar_/?hl=en"
+                href="https://www.instagram.com/__.irtaza11"
                 target="_blank"
                 data-cursor="disable"
                 className="contact-social"
@@ -169,11 +169,11 @@ const Contact = () => {
                   scrollToTop();
                 }}
               >
-                Kashif<span>Ali</span>
+                Irtaza<span>Ahmad</span>
               </a>
               <p>
-                Full-Stack Developer crafting fast, accessible and
-                user-centric web experiences.
+                AI/ML Engineer building intelligent, data-driven
+                solutions.
               </p>
             </div>
 
@@ -188,21 +188,21 @@ const Contact = () => {
             <div className="footer-col">
               <h4>Connect</h4>
               <div className="footer-socials">
-                <a href="https://github.com/Kashif-Khokhar" target="_blank" rel="noreferrer" aria-label="GitHub" data-cursor="disable">
+                <a href="https://github.com/Irtaza-Ghafoor" target="_blank" rel="noreferrer" aria-label="GitHub" data-cursor="disable">
                   <FaGithub />
                 </a>
-                <a href="https://www.linkedin.com/in/kashif-ali-khokhar/" target="_blank" rel="noreferrer" aria-label="LinkedIn" data-cursor="disable">
+                <a href="https://www.linkedin.com/in/irtaza-ahmad-1962602a5/" target="_blank" rel="noreferrer" aria-label="LinkedIn" data-cursor="disable">
                   <FaLinkedinIn />
                 </a>
-                <a href="https://x.com/Kashif_Khokhar1" target="_blank" rel="noreferrer" aria-label="Twitter / X" data-cursor="disable">
+                <a href="https://x.com/irtazaghafoor27" target="_blank" rel="noreferrer" aria-label="Twitter / X" data-cursor="disable">
                   <FaXTwitter />
                 </a>
-                <a href="https://www.instagram.com/malik._.kashif_khokhar_/?hl=en" target="_blank" rel="noreferrer" aria-label="Instagram" data-cursor="disable">
+                <a href="https://www.instagram.com/__.irtaza11" target="_blank" rel="noreferrer" aria-label="Instagram" data-cursor="disable">
                   <FaInstagram />
                 </a>
               </div>
-              <a href="mailto:kashifalikhokharofficial@gmail.com" className="footer-mail" data-cursor="disable">
-                kashifalikhokharofficial@gmail.com
+              <a href="mailto:irtazaahmad2715@gmail.com" className="footer-mail" data-cursor="disable">
+                irtazaahmad2715@gmail.com
               </a>
             </div>
 
@@ -220,10 +220,10 @@ const Contact = () => {
 
           <div className="footer-bottom">
             <p className="footer-copy">
-              <MdCopyright /> {new Date().getFullYear()} Kashif Ali. All rights reserved.
+              <MdCopyright /> {new Date().getFullYear()} Irtaza Ahmad. All rights reserved.
             </p>
             <p className="footer-credit">
-              Designed &amp; Developed by <span>Kashif Ali</span>
+              Designed &amp; Developed by <span>Irtaza Ahmad</span>
             </p>
             <p className="footer-built">Built with React · Three.js · GSAP</p>
           </div>

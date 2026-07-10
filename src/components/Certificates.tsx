@@ -3,64 +3,16 @@ import { FiAward, FiExternalLink } from "react-icons/fi";
 
 const certificates = [
   {
-    title: "Fullstack Development Specialization",
-    issuer: "Scrimba (via Coursera)",
-    date: "Feb 22, 2026",
-    link: "https://coursera.org/verify/specialization/8QG0TZM2SKF2",
-  },
-  {
-    title: "Google AI Fundamentals",
-    issuer: "Google (via Coursera)",
-    date: "Feb 19, 2026",
-    link: "https://coursera.org/verify/LKWQHNHD7Q21",
-  },
-  {
-    title: "Angular",
+    title: "Machine Learning for Beginners",
     issuer: "Sololearn",
-    date: "Feb 17, 2026",
-    link: "https://www.sololearn.com/en/certificates/CC-HWYXEAP3",
-  },
-  {
-    title: "HTML and CSS in depth",
-    issuer: "Meta (via Coursera)",
-    date: "Jul 18, 2024",
-    link: "https://coursera.org/verify/4KK3BABP8SFV",
-  },
-  {
-    title: "Introduction to JavaScript",
-    issuer: "Sololearn",
-    date: "Feb 19, 2026",
-    link: "https://www.sololearn.com/en/certificates/CC-NIWJAZPF",
-  },
-  {
-    title: "Prompt Engineering",
-    issuer: "Sololearn",
-    date: "Feb 18, 2026",
-    link: "https://www.sololearn.com/en/certificates/CC-WZ04IYN3",
-  },
-  {
-    title: "Introduction to SQL",
-    issuer: "Sololearn",
-    date: "Feb 18, 2026",
-    link: "https://www.sololearn.com/en/certificates/CC-HDTH4LRG",
-  },
-  {
-    title: "Coding Foundations",
-    issuer: "Sololearn",
-    date: "Feb 16, 2026",
-    link: "https://www.sololearn.com/en/certificates/CC-HJZ8LPKO",
+    date: "Jun 20, 2026",
+    link: "https://www.sololearn.com/certificates/CC-I6XMVCAM",
   },
   {
     title: "Introduction to Python",
     issuer: "Sololearn",
-    date: "Feb 13, 2026",
-    link: "https://www.sololearn.com/en/certificates/CC-0MW1DFXS",
-  },
-  {
-    title: "Web Development",
-    issuer: "Sololearn",
-    date: "Feb 12, 2026",
-    link: "https://www.sololearn.com/en/certificates/CC-H25INK7X",
+    date: "Jun 26, 2026",
+    link: "https://www.sololearn.com/certificates/CC-QVWCSKHQ",
   },
 ];
 

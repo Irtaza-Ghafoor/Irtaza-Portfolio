@@ -93,9 +93,9 @@ const WhatIDo = () => {
               <h3>WHO I AM</h3>
               <div className="what-icon user-icon"><FiUser /></div>
               <ul>
-                <li>Dedicated Full-Stack Developer with a relentless focus on creating high-performance, user-centric software solutions.</li>
-                <li>Computer Science scholar specializing in modern architectural patterns and robust system design.</li>
-                <li>A proactive problem-solver driven by technical excellence and the desire to build products that scale.</li>
+                <li>Dedicated AI/ML Engineer with a relentless focus on building accurate, production-grade predictive systems.</li>
+                <li>Computer Science scholar specializing in machine learning, statistical modeling, and data-driven decision making.</li>
+                <li>A proactive problem-solver driven by curiosity and the desire to turn raw data into real-world impact.</li>
               </ul>
               <div className="what-arrow"></div>
             </div>
@@ -122,9 +122,9 @@ const WhatIDo = () => {
               <h3>WHAT I DO</h3>
               <div className="what-icon code-icon"><FiCode /></div>
               <ul>
-                <li>Develop end-to-end web solutions using the MERN stack and Next.js for modern internal & public platforms.</li>
-                <li>Design efficient database schemas in MySQL and MongoDB, ensuring data integrity and high-speed retrieval.</li>
-                <li>Craft pixel-perfect, interactive user interfaces with Tailwind CSS and Framer Motion for a premium UX.</li>
+                <li>Build end-to-end ML pipelines with Python, Scikit-Learn, XGBoost, and LightGBM for regression and classification tasks.</li>
+                <li>Engineer features and preprocess data with Pandas and NumPy, ensuring clean, leak-free training pipelines.</li>
+                <li>Train and fine-tune deep learning models with PyTorch and TensorFlow, and build LLM-powered apps with Hugging Face and LangChain.</li>
               </ul>
               <div className="what-arrow"></div>
             </div>
@@ -151,9 +151,9 @@ const WhatIDo = () => {
               <h3>MY GOALS</h3>
               <div className="what-icon target-icon"><FiTarget /></div>
               <ul>
-                <li>Integrate AI-driven features into web ecosystems to enhance user productivity and experience.</li>
-                <li>Contribute to large-scale open-source projects to give back to the developer community.</li>
-                <li>Master system architecture to build indestructible, enterprise-ready software products.</li>
+                <li>Deploy production-grade ML and GenAI systems that make measurable business impact.</li>
+                <li>Contribute to open-source machine learning projects to give back to the ML community.</li>
+                <li>Master MLOps and large-scale model deployment to build reliable, enterprise-ready AI products.</li>
               </ul>
               <div className="what-arrow"></div>
             </div>
@@ -180,9 +180,9 @@ const WhatIDo = () => {
               <h3>MY PHILOSOPHY</h3>
               <div className="what-icon bulb-icon"><FiCpu /></div>
               <ul>
-                <li>Code is for humans to read and machines to execute; I prioritize clean, modular, and SOLID code.</li>
-                <li>Security and performance are not features—they are fundamental requirements of every system I build.</li>
-                <li>The best way to predict the future is to build it; I bridge ideas and reality through technology.</li>
+                <li>A model is only as good as its data; I prioritize rigorous validation over leaderboard chasing.</li>
+                <li>Reproducibility and honest evaluation metrics are not optional—they are fundamental to trustworthy ML.</li>
+                <li>The best way to predict the future is to build the model that forecasts it; I bridge data and decisions.</li>
               </ul>
               <div className="what-arrow"></div>
             </div>

@@ -87,6 +87,13 @@
   margin: 0;
 }
 
+.education-info .honor {
+  font-size: 14px;
+  color: var(--accentColor);
+  margin: 4px 0 0;
+  font-weight: 500;
+}
+
 @media (max-width: 768px) {
   .education-card {
     padding: 25px;

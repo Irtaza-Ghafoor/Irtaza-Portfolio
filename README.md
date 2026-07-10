@@ -1,4 +1,4 @@
-# Kashif Ali Portfolio 🚀
+# Irtaza Ahmad Portfolio 🚀
 
 A modern, responsive, and high-performance portfolio website built with React, TypeScript, and 3D technologies.
 
@@ -6,7 +6,7 @@ A modern, responsive, and high-performance portfolio website built with React, T
 
 ## About Me 👋
 
-I'm **Kashif Ali**, a Full-Stack Developer and Computer Science student at Superior University (2023 - 2027). I have a passion for turning ideas into scalable web applications and solving complex coding challenges. I thrive on constantly learning and exploring new technologies to build impactful solutions.
+I'm **Irtaza Ahmad**, a Gold Medalist and AI/ML Engineer studying Computer Science at Bahria University (Lateral Entry BSCS, 2025 - 2027). I have a passion for turning data into intelligent, real-world solutions — designing, benchmarking, and deploying end-to-end machine learning pipelines across healthcare, telecom, and drug discovery.
 
 ## Features ✨
 
@@ -20,52 +20,43 @@ I'm **Kashif Ali**, a Full-Stack Developer and Computer Science student at Super
 
 ## Featured Projects 🏗️
 
-- **SkyCast Elite** - [Live](https://sky-cast-nine-theta.vercel.app/)  
-  Weather Intelligence app built with React, TypeScript, and OpenWeather API.
-- **Timetable Generator** - [Live](https://timetable-generator-five.vercel.app/)  
-  Academic tool for efficient schedule management.
-- **Superior GPA Calculator** - [Live](https://superior-gpa-calculator-phi.vercel.app/dashboard)  
-  Academic tool built with Tailwind CSS for students.
-- **Currency PRO** - [Live](https://currency-converter-mu-ecru.vercel.app/)  
-  Financial tool integrated with Currency API.
-- **Velora** - [Live](https://velora-studio-nu.vercel.app/)  
-  Event Invitation Studio using Framer Motion.
-- **PrismConvert** - [Live](https://prism-convert-six.vercel.app/)  
-  Image & PDF Tools built with Next.js.
-- **CryptoStego** - [Live](https://crypto-stego.vercel.app/)  
-  Cybersecurity tool using AES-256 encryption and LSB steganography (React, CryptoJS).
+- **Customer Segmentation Matrix** - [GitHub](https://github.com/Irtaza-Ghafoor/customer-segmentation-matrix-kmeans)
+  Unsupervised customer segmentation using K-Means++ and the Elbow Method.
+- **Chronic Kidney Disease Prediction** - [GitHub](https://github.com/Irtaza-Ghafoor/chronic-kidney-disease-ensemble-prediction)
+  Soft-voting ensemble (Random Forest, XGBoost, Logistic Regression) with MICE imputation for CKD risk screening.
+- **Telecom Customer Churn Prediction** - [GitHub](https://github.com/Irtaza-Ghafoor/telecom-customer-churn-prediction-ensemble)
+  Churn prediction with a stratified XGBoost + Random Forest ensemble (ROC-AUC ≈ 0.844).
+- **Used Car Price Prediction** - [GitHub](https://github.com/Irtaza-Ghafoor/used-car-price-prediction-ensemble)
+  Vehicle price regression using a Random Forest + XGBoost VotingRegressor (R² ≈ 0.9429).
 
 ## Professional Experience 💼
 
-- **Full Stack Developer** @ Infinitiv.ai (2026 - Present)  
-  Working on AI-powered solutions and optimizing application performance for scalability.
-- **Frontend Developer** @ Muasa Solutions (2025)  
-  Built responsive user interfaces and interactive features.
+- **AI/ML Intern** @ Infinitiv.ai (2026 - Present)
+  Building and evaluating machine learning pipelines — regression, classification, and ensemble models — with a focus on data preprocessing, feature engineering, and model deployment.
 
 ## Tech Stack 🛠️
 
-- **Languages:** TypeScript, JavaScript, PHP, HTML5, CSS3
-- **Frontend:** React, Next.js, Vite, Tailwind CSS, Framer Motion
-- **Animations & 3D:** GSAP, Three.js, React Three Fiber
-- **Backend & Database:** Node.js, Express.js, PHP, MongoDB, MySQL
-- **Tools:** Git, GitHub, VS Code, Vercel
+- **Languages:** Python, C++, TypeScript, JavaScript
+- **Machine Learning:** Scikit-Learn, XGBoost, LightGBM, CatBoost, Ensemble Learning (Voting, Stacking)
+- **Data Engineering & EDA:** MICE Imputation, Feature Scaling, Frequency/Target Encoding, Pandas, NumPy
+- **Deep Learning & GenAI:** PyTorch, TensorFlow, Hugging Face, LangChain, OpenAI & Anthropic APIs
+- **Frontend (this site):** React, Vite, Three.js, React Three Fiber, GSAP
+- **Tools:** Git, GitHub, Docker, Jupyter Notebook, Google Colab, VS Code
 
 ## Contact & Connect 🔗
 
-- 📧 **Email:** [kashifalikhokharofficial@gmail.com](mailto:kashifalikhokharofficial@gmail.com)
-- 🐙 **GitHub:** [@Kashif-Khokhar](https://github.com/Kashif-Khokhar)
-- 💼 **LinkedIn:** [Kashif Ali Khokhar](https://www.linkedin.com/in/kashif-ali-khokhar/)
-- 🐦 **Twitter/X:** [@Kashif_Khokhar1](https://x.com/Kashif_Khokhar1)
-- 📸 **Instagram:** [@malik._.kashif_khokhar_](https://www.instagram.com/malik._.kashif_khokhar_/?hl=en)
-
-
+- 📧 **Email:** [irtazaahmad2715@gmail.com](mailto:irtazaahmad2715@gmail.com)
+- 🐙 **GitHub:** [@Irtaza-Ghafoor](https://github.com/Irtaza-Ghafoor)
+- 💼 **LinkedIn:** [Irtaza Ahmad](https://www.linkedin.com/in/irtaza-ahmad-1962602a5/)
+- 🐦 **Twitter/X:** [@irtazaghafoor27](https://x.com/irtazaghafoor27)
+- 📸 **Instagram:** [@__.irtaza11](https://www.instagram.com/__.irtaza11)
 
 ## Getting Started 🚀
 
 ```bash
 # Clone the repository
-git clone https://github.com/Kashif-Khokhar/Kashif-Portfolio.git
-cd Kashif-Portfolio
+git clone https://github.com/Irtaza-Ghafoor/Irtaza-Portfolio.git
+cd Irtaza-Portfolio
 
 # Install dependencies
 npm install

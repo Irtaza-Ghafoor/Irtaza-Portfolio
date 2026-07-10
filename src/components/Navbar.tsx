@@ -142,7 +142,7 @@ const Navbar = () => {
             else window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
-          K<span>A</span>
+          I<span>A</span>
         </a>
 
         {/* Mobile Toggle Button */}
@@ -186,21 +186,21 @@ const Navbar = () => {
           {/* Drawer footer (mobile only): socials + email. */}
           <li className="nav-drawer-footer">
             <div className="nav-drawer-socials">
-              <a href="https://github.com/Kashif-Khokhar" target="_blank" rel="noreferrer" aria-label="GitHub">
+              <a href="https://github.com/Irtaza-Ghafoor" target="_blank" rel="noreferrer" aria-label="GitHub">
                 <FaGithub />
               </a>
-              <a href="https://www.linkedin.com/in/kashif-ali-khokhar/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/irtaza-ahmad-1962602a5/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
                 <FaLinkedinIn />
               </a>
-              <a href="https://x.com/Kashif_Khokhar1" target="_blank" rel="noreferrer" aria-label="Twitter / X">
+              <a href="https://x.com/irtazaghafoor27" target="_blank" rel="noreferrer" aria-label="Twitter / X">
                 <FaXTwitter />
               </a>
-              <a href="https://www.instagram.com/malik._.kashif_khokhar_/?hl=en" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <a href="https://www.instagram.com/__.irtaza11" target="_blank" rel="noreferrer" aria-label="Instagram">
                 <FaInstagram />
               </a>
             </div>
-            <a className="nav-drawer-mail" href="mailto:kashifalikhokharofficial@gmail.com">
-              kashifalikhokharofficial@gmail.com
+            <a className="nav-drawer-mail" href="mailto:irtazaahmad2715@gmail.com">
+              irtazaahmad2715@gmail.com
             </a>
           </li>
         </ul>

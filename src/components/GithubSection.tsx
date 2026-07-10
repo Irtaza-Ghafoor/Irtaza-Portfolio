@@ -52,7 +52,7 @@ interface UserProfile {
   created_at?: string;
 }
 
-const username = "Kashif-Khokhar";
+const username = "Irtaza-Ghafoor";
 
 // The calendar defaults to the current year; the selector lets you page back
 // through earlier years (down to the account's join year).
@@ -63,9 +63,9 @@ const CURRENT_YEAR = new Date().getFullYear();
 // out so we never display wrong numbers.
 const fallbackProfile: UserProfile = {
   avatar_url: `https://github.com/${username}.png`,
-  name: "Kashif Ali",
+  name: "Irtaza Ahmad",
   login: username,
-  bio: "Full Stack Developer | Building scalable web solutions.",
+  bio: "AI/ML Engineer | Building intelligent, data-driven solutions.",
   html_url: `https://github.com/${username}`,
 };
 
@@ -313,7 +313,7 @@ const GithubSection: React.FC = () => {
             <h4>{profile.name || username}</h4>
             <p className="profile-handle">@{profile.login}</p>
             <div className="profile-bio">
-              <p>{profile.bio || "Full Stack Developer | Building scalable web solutions."}</p>
+              <p>{profile.bio || "AI/ML Engineer | Building intelligent, data-driven solutions."}</p>
             </div>
           </div>
         </div>

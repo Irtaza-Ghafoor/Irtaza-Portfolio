@@ -15,29 +15,16 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Frontend Developer</h4>
-                <h5>Muasa Solutions</h5>
-              </div>
-              <h3>2025</h3>
-            </div>
-            <p>
-              Built responsive user interfaces and implemented interactive features using React 
-              and modern frontend frameworks. Collaborated with design teams to create 
-              seamless user experiences.
-            </p>
-          </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>Full Stack Developer</h4>
+                <h4>AI/ML Intern</h4>
                 <h5>Infinitiv.ai</h5>
               </div>
-              <h3>2026</h3>
+              <h3>2026 - Present</h3>
             </div>
             <p>
-              Developing and maintaining full-stack applications using modern technologies. 
-              Working on AI-powered solutions, implementing new features, and optimizing 
-              application performance for scalability.
+              Working on machine learning pipelines and predictive modeling, building
+              and evaluating regression, classification, and ensemble models. Collaborating
+              on data preprocessing, feature engineering, and model deployment for
+              production-ready AI solutions.
             </p>
           </div>
         </div>
