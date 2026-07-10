@@ -8,6 +8,7 @@ import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
 import { useEffect } from "react";
 import HoverLinks from "./HoverLinks";
+import { RESUME_URL } from "../constants";
 
 const SocialIcons = () => {
   useEffect(() => {
@@ -112,7 +113,7 @@ const SocialIcons = () => {
       </div>
       <a
         className="resume-button"
-        href="/Kashif-Ali-Resume.pdf"
+        href={RESUME_URL}
         target="_blank"
         rel="noreferrer"
       >

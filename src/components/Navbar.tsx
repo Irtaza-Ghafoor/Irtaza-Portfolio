@@ -6,6 +6,7 @@ import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import "./styles/Navbar.css";
+import { RESUME_URL } from "../constants";
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 export let smoother: ScrollSmoother;
@@ -172,7 +173,7 @@ const Navbar = () => {
           <li className="mobile-resume-link">
             <a
               className="resume-link"
-              href="/Kashif-Ali-Resume.pdf"
+              href={RESUME_URL}
               target="_blank"
               rel="noreferrer"
               onClick={() => setIsMenuOpen(false)}
